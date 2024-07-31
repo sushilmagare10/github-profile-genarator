@@ -1,9 +1,6 @@
 "use client"
 
 import React from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
-import { Input } from '../ui/input'
-import { Textarea } from '../ui/textarea'
 import Introduction from './Introduction'
 import Skills from './Skills'
 import useSidebarStore from '@/store/SidebarStore'
@@ -26,7 +23,7 @@ const ProfileForm = () => {
     }
 
     return (
-        <div className=' sticky top-4 flex flex-col w-full justify-start items-center gap-4 bg-card p-4 h-full border border-black/25 shadow-2xl rounded-lg'>
+        <div className=' sticky top-4 flex flex-col w-full justify-start items-center gap-4 bg-card p-4 h-full min-h-screen border border-black/25 shadow-2xl rounded-lg'>
 
             {renderActionSection()}
         </div>
