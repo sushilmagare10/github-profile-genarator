@@ -41,7 +41,6 @@ const Support = () => {
                         <SelectContent>
                             <SelectItem value="shieldIcons">Shields Icons</SelectItem>
                             <SelectItem value="simpleIcons">Simple Icons</SelectItem>
-                            <SelectItem value="githubRaw">GitHub Raw Icons</SelectItem>
                         </SelectContent>
                     </Select>
                     {selectedProvider === 'shieldIcons' && (
