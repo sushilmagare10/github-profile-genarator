@@ -35,6 +35,8 @@ export const SkillsData = {
             { id: "OCaml-shields", label: "OCaml", url: "https://img.shields.io/badge/OCaml-3BE133?logo=ocaml&logoColor=white" },
             { id: "Scheme-shields", label: "Scheme", url: "https://img.shields.io/badge/Scheme-6D9B4C?logo=scheme&logoColor=white" },
             { id: "APL-shields", label: "APL", url: "https://img.shields.io/badge/APL-0050F0?logo=apl&logoColor=white" },
+            { id: "MATLAB-shields", label: "MATLAB", url: "https://img.shields.io/badge/MATLAB-0076A8?logo=matlab&logoColor=white" },
+            { id: "Pascal-shields", label: "Pascal", url: "https://img.shields.io/badge/Pascal-002D72?logo=pascal&logoColor=white" },
         ],
         "ORM": [
             { id: "Prisma-shields", label: "Prisma", url: "https://img.shields.io/badge/Prisma-2D3748?logo=prisma&logoColor=white" },
@@ -96,7 +98,14 @@ export const SkillsData = {
             { id: "Quarkus-shields", label: "Quarkus", url: "https://img.shields.io/badge/Quarkus-8C1D40?logo=quarkus&logoColor=white" },
             { id: "Grails-shields", label: "Grails", url: "https://img.shields.io/badge/Grails-6DB33F?logo=grails&logoColor=white" },
             { id: "PlayFramework-shields", label: "Play Framework", url: "https://img.shields.io/badge/Play_Framework-FF0000?logo=play-framework&logoColor=white" },
-            { id: "Web2py-shields", label: "Web2py", url: "https://img.shields.io/badge/Web2py-7D1D68?logo=web2py&logoColor=white" }
+            { id: "Web2py-shields", label: "Web2py", url: "https://img.shields.io/badge/Web2py-7D1D68?logo=web2py&logoColor=white" },
+            { id: "Bun-shields", label: "Bun", url: "https://img.shields.io/badge/Bun-FFDF00?logo=bun&logoColor=White" },
+            { id: "Phoenix-shields", label: "Phoenix", url: "https://img.shields.io/badge/Phoenix-FF6600?logo=phoenix&logoColor=white" },
+            { id: "Meteor-shields", label: "Meteor", url: "https://img.shields.io/badge/Meteor-DE4F4F?logo=meteor&logoColor=white" },
+            { id: "CakePHP-shields", label: "CakePHP", url: "https://img.shields.io/badge/CakePHP-D33C43?logo=cakephp&logoColor=white" },
+            { id: "Pyramid-shields", label: "Pyramid", url: "https://img.shields.io/badge/Pyramid-000000?logo=pyramid&logoColor=white" },
+            { id: "Yii-shields", label: "Yii", url: "https://img.shields.io/badge/Yii-007F00?logo=yii&logoColor=white" },
+            { id: "Fiber-shields", label: "Fiber", url: "https://img.shields.io/badge/Fiber-00A8E8?logo=fiber&logoColor=white" }
         ],
         "Database": [
             { id: "MongoDB-shields", label: "MongoDB", url: "https://img.shields.io/badge/MongoDB-4EA94B?logo=mongodb&logoColor=white" },
