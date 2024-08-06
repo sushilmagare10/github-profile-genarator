@@ -1,13 +1,5 @@
-
-
 export const SocialData = {
     "shieldIcons": [
-        {
-            id: "academia",
-            label: "Academia",
-            url: "https://img.shields.io/badge/Academia-fff?logo=academia&logoColor=black",
-            href: (username: string) => `https://academia.edu/${username}`
-        },
         {
             id: "behance",
             label: "Behance",
@@ -15,22 +7,10 @@ export const SocialData = {
             href: (username: string) => `https://www.behance.net/${username}`
         },
         {
-            id: "biolink",
-            label: "BioLink",
-            url: "https://img.shields.io/badge/bio.link-000000%7D?logo=biolink&logoColor=white",
-            href: (username: string) => `https://bio.link/${username}`
-        },
-        {
             id: "bitbucket",
             label: "Bitbucket",
             url: "https://img.shields.io/badge/Bitbucket-0747a6?logo=bitbucket&logoColor=white",
             href: (username: string) => `https://bitbucket.org/${username}`
-        },
-        {
-            id: "vk",
-            label: "VK",
-            url: "https://img.shields.io/badge/вконтакте-%232E87FB.svg?&logo=vk&logoColor=white",
-            href: (username: string) => `https://vk.com/${username}`
         },
         {
             id: "codechef",
@@ -95,7 +75,7 @@ export const SocialData = {
         {
             id: "twitter",
             label: "Twitter",
-            url: "https://img.shields.io/badge/Twitter-1DA1F2?logo=twitter&logoColor=white",
+            url: "https://img.shields.io/badge/Twitter-000000?logo=X&logoColor=white",
             href: (username: string) => `https://twitter.com/${username}`
         },
         {
@@ -117,98 +97,4 @@ export const SocialData = {
             href: (username: string) => `https://www.reddit.com/user/${username}`
         }
     ],
-    "simpleIcons": [
-        {
-            id: "simple-icons-facebook",
-            label: "Facebook",
-            url: "https://img.shields.io/badge/Facebook-1877F2?logo=facebook&logoColor=white",
-            href: (username: string) => `https://www.facebook.com/${username}`
-        },
-        {
-            id: "simple-icons-twitter",
-            label: "Twitter",
-            url: "https://img.shields.io/badge/Twitter-1DA1F2?logo=twitter&logoColor=white",
-            href: (username: string) => `https://twitter.com/${username}`
-        },
-        {
-            id: "simple-icons-github",
-            label: "GitHub",
-            url: "https://img.shields.io/badge/GitHub-100000?logo=github&logoColor=white",
-            href: (username: string) => `https://github.com/${username}`
-        },
-        {
-            id: "simple-icons-linkedin",
-            label: "LinkedIn",
-            url: "https://img.shields.io/badge/LinkedIn-0077B5?logo=linkedin&logoColor=white",
-            href: (username: string) => `https://www.linkedin.com/in/${username}`
-        },
-        {
-            id: "simple-icons-medium",
-            label: "Medium",
-            url: "https://img.shields.io/badge/Medium-00AB6C?logo=medium&logoColor=white",
-            href: (username: string) => `https://medium.com/@${username}`
-        },
-        {
-            id: "simple-icons-gitlab",
-            label: "GitLab",
-            url: "https://img.shields.io/badge/GitLab-330F63?logo=gitlab&logoColor=white",
-            href: (username: string) => `https://gitlab.com/${username}`
-        },
-        {
-            id: "simple-icons-dribbble",
-            label: "Dribbble",
-            url: "https://img.shields.io/badge/Dribbble-EA4C89?logo=dribbble&logoColor=white",
-            href: (username: string) => `https://dribbble.com/${username}`
-        },
-        {
-            id: "simple-icons-pinterest",
-            label: "Pinterest",
-            url: "https://img.shields.io/badge/Pinterest-%23E60023.svg?&logo=Pinterest&logoColor=white",
-            href: (username: string) => `https://www.pinterest.com/${username}`
-        },
-        {
-            id: "simple-icons-youtube",
-            label: "YouTube",
-            url: "https://img.shields.io/badge/YouTube-FF0000?logo=youtube&logoColor=white",
-            href: (username: string) => `https://www.youtube.com/user/${username}`
-        }
-    ],
-    "githubRaw": [
-        {
-            id: "githubraw-twitter",
-            label: "Twitter",
-            url: "https://raw.githubusercontent.com/github/explore/main/topics/twitter/twitter.png",
-            href: (username: string) => `https://twitter.com/${username}`
-        },
-        {
-            id: "githubraw-github",
-            label: "GitHub",
-            url: "https://raw.githubusercontent.com/github/explore/main/topics/github/github.png",
-            href: (username: string) => `https://github.com/${username}`
-        },
-        {
-            id: "githubraw-linkedin",
-            label: "LinkedIn",
-            url: "https://raw.githubusercontent.com/github/explore/main/topics/linkedin/linkedin.png",
-            href: (username: string) => `https://www.linkedin.com/in/${username}`
-        },
-        {
-            id: "githubraw-youtube",
-            label: "YouTube",
-            url: "https://raw.githubusercontent.com/github/explore/main/topics/youtube/youtube.png",
-            href: (username: string) => `https://www.youtube.com/user/${username}`
-        },
-        {
-            id: "githubraw-tiktok",
-            label: "TikTok",
-            url: "https://raw.githubusercontent.com/github/explore/main/topics/tiktok/tiktok.png",
-            href: (username: string) => `https://www.tiktok.com/@${username}`
-        },
-        {
-            id: "githubraw-reddit",
-            label: "Reddit",
-            url: "https://raw.githubusercontent.com/github/explore/main/topics/reddit/reddit.png",
-            href: (username: string) => `https://www.reddit.com/user/${username}`
-        }
-    ]
 };
