@@ -82,13 +82,13 @@ export const SocialData = {
             id: "youtube",
             label: "YouTube",
             url: "https://img.shields.io/badge/YouTube-FF0000?logo=youtube&logoColor=white",
-            href: (username: string) => `https://www.youtube.com/user/${username}`
+            href: (username: string) => `https://www.youtube.com/@${username.trim()}`
         },
         {
             id: "tiktok",
             label: "TikTok",
             url: "https://img.shields.io/badge/TikTok-000000?logo=tiktok&logoColor=white",
-            href: (username: string) => `https://www.tiktok.com/@${username}`
+            href: (username: string) => `https://www.tiktok.com/@${username.trim()}`
         },
         {
             id: "reddit",
