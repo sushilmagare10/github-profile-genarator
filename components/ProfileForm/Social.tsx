@@ -26,6 +26,13 @@ const Social = () => {
     const {
         addIcon,
         removeIcon,
+        icons,
+        sectionStyle,
+        setGap,
+        setSectionStyle,
+        setIconHeight,
+        setIcons,
+
     } = useSocialStore()
 
 
@@ -44,13 +51,13 @@ const Social = () => {
 
     return (
         <Tabs defaultValue="select" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 gap-2">
-                <TabsTrigger value="select" className='border border-black/30'>Select</TabsTrigger>
-                <TabsTrigger value="setting" className='border border-black/30'>Setting</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-2 gap-2 rounded-md">
+                <TabsTrigger value="select" className='rounded-lg border border-gray-300'>Select</TabsTrigger>
+                <TabsTrigger value="setting" className='rounded-lg border border-gray-300'>Setting</TabsTrigger>
             </TabsList>
 
             <TabsContent value="select">
-                <Card className='w-full p-0 flex flex-col border-none gap-4'>
+                <Card className='w-full p-4 flex flex-col border border-gray-200 rounded-lg shadow-sm'>
                     <CardTitle className='mt-2'>Social</CardTitle>
                     <CardContent className='p-0'>
                         <Select onValueChange={handleStyleChange} defaultValue="flat">
@@ -68,7 +75,7 @@ const Social = () => {
                     <CardContent className='p-0 mt-4 grid grid-cols-2 gap-4'>
                         {socialData.map((social) => {
                             return (
-                                <Card key={social.id} className='flex flex-col justify-center items-center p-2 h-40 cursor-pointer shadow-md'>
+                                <Card key={social.id} className='flex flex-col justify-center items-center border border-gray-200 p-2 h-28 cursor-pointer shadow-md'>
                                     <img
                                         src={`${social.url.split('?')[0]}?style=${selectedStyle}&${social.url.split('?')[1] || ''}`}
                                         alt={social.label}
@@ -87,7 +94,16 @@ const Social = () => {
                 </Card>
             </TabsContent>
             <TabsContent value='setting'>
-                <Setting />
+                <Setting
+                    icons={icons}
+                    sectionStyle={sectionStyle}
+                    setGap={setGap}
+                    setSectionStyle={setSectionStyle}
+                    setIconHeight={setIconHeight}
+                    setIcons={setIcons}
+                    removeIcon={removeIcon}
+                    title="Edit Social Media Settings"
+                />
             </TabsContent>
         </Tabs>
     )
