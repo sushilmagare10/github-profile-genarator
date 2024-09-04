@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { HeightType, GapType, AlignmentType } from '../types/common';
 
 type Icon = {
     id: string;
@@ -7,65 +7,82 @@ type Icon = {
     href: string;
 };
 
-type HeightType = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-
-const heightValues: Record<HeightType, number> = {
-    xs: 16,
-    sm: 18,
-    md: 24,
-    lg: 28,
-    xl: 32,
-};
-
-type GapType = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-
-const gapValues: Record<GapType, number> = {
-    xs: 4,
-    sm: 8,
-    md: 12,
-    lg: 16,
-    xl: 18
-};
-
 type SocialState = {
     icons: Icon[];
-    userName: string;
-    sectionStyle: string;
+    selectedStyle: string;
+    sectionStyle: AlignmentType;
     gap: GapType;
     iconHeight: HeightType;
     setIconHeight: (height: HeightType) => void;
     setIcons: (icons: Icon[]) => void;
     addIcon: (icon: Icon) => void;
     removeIcon: (id: string) => void;
-    setUserName: (userName: string) => void;
-    setSectionStyle: (sectionStyle: string) => void;
+    setSelectedStyle: (style: string) => void;
+    setSectionStyle: (sectionStyle: AlignmentType) => void;
     setGap: (gap: GapType) => void;
 };
 
-const useSocialStore = create<SocialState>()(
-    persist(
-        (set) => ({
-            icons: [],
-            userName: "",
-            sectionStyle: "left",
-            gap: 'sm',
-            iconHeight: 'sm',
-            setIconHeight: (iconHeight) => set({ iconHeight }),
-            setIcons: (icons) => set({ icons }),
-            addIcon: (icon) => set((state) => ({
-                icons: [...state.icons.filter(i => i.id !== icon.id), icon]
-            })),
-            removeIcon: (id) => set((state) => ({
-                icons: state.icons.filter(icon => icon.id !== id)
-            })),
-            setUserName: (userName) => set({ userName }),
-            setSectionStyle: (sectionStyle) => set({ sectionStyle }),
-            setGap: (gap) => set({ gap })
-        }),
+
+const SocialData = {
+    "shieldIcons": [
         {
-            name: 'social-storage',
-        }
-    )
-);
+            id: "github",
+            label: "GitHub",
+            url: "https://img.shields.io/badge/GitHub-100000?logo=github&logoColor=white",
+            href: (username: string) => `https://github.com/${username}`
+        },
+        {
+            id: "linkedin",
+            label: "LinkedIn",
+            url: "https://img.shields.io/badge/LinkedIn-0077B5?logo=linkedin&logoColor=white",
+            href: (username: string) => `https://www.linkedin.com/in/${username}`
+        },
+        {
+            id: "twitter",
+            label: "Twitter",
+            url: "https://img.shields.io/badge/Twitter-000000?logo=X&logoColor=white",
+            href: (username: string) => `https://twitter.com/${username}`
+        },
+        {
+            id: "gmail",
+            label: "Gmail",
+            url: "https://img.shields.io/badge/Gmail-D14836?logo=gmail&logoColor=white",
+            href: (email: string) => `mailto:${email}`
+        },
+    ],
+};
+
+const useSocialStore = create<SocialState>((set) => ({
+    icons: [],
+    selectedStyle: "for-the-badge",
+    sectionStyle: "left",
+    gap: 'xs',
+    iconHeight: 'xs',
+    setIconHeight: (iconHeight) => set({ iconHeight }),
+    setIcons: (icons) => set({ icons }),
+    addIcon: (icon) => set((state) => ({
+        icons: [...state.icons.filter(i => i.id !== icon.id), icon]
+    })),
+    removeIcon: (id) => set((state) => ({
+        icons: state.icons.filter(icon => icon.id !== id)
+    })),
+    setSelectedStyle: (style) => set(() => ({ selectedStyle: style })),
+    setSectionStyle: (sectionStyle) => set({ sectionStyle }),
+    setGap: (gap) => set({ gap }),
+}));
+
+
+const initializeStore = () => {
+    const store = useSocialStore.getState();
+    const dummyIcons = [
+        { id: "github", url: SocialData.shieldIcons.find(icon => icon.id === "github")!.url, href: SocialData.shieldIcons.find(icon => icon.id === "github")!.href("sushilmagare10") },
+        { id: "linkedin", url: SocialData.shieldIcons.find(icon => icon.id === "linkedin")!.url, href: SocialData.shieldIcons.find(icon => icon.id === "linkedin")!.href("sushil-magare") },
+        { id: "twitter", url: SocialData.shieldIcons.find(icon => icon.id === "twitter")!.url, href: SocialData.shieldIcons.find(icon => icon.id === "twitter")!.href("Sushil__SM") },
+        { id: "gmail", url: SocialData.shieldIcons.find(icon => icon.id === "gmail")!.url, href: SocialData.shieldIcons.find(icon => icon.id === "gmail")!.href("sushilmagare10@gmail.com") },
+    ];
+    store.setIcons(dummyIcons);
+};
+
+initializeStore();
 
 export default useSocialStore;
