@@ -1,6 +1,5 @@
 "use client"
 
-
 import React, { useEffect, useMemo, useState } from 'react'
 import { Card, CardContent, CardTitle } from '../ui/card'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
@@ -10,28 +9,27 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
 import Setting from './Setting'
 import useSupportStore from '@/store/SupportStore'
 
+
+type Usernames = {
+    [id: string]: string;
+};
+
 const Support = () => {
+    const [usernames, setUsernames] = useState<Usernames>({});
 
-    const [usernames, setUsernames] = useState({});
-
-    const handleStyleChange = (value: any) => {
+    const handleStyleChange = (value: string) => {
         setSelectedStyle(value)
     }
 
-    const handleProviderChange = (value: any) => {
-        setSelectedProvider(value)
-    }
-
-    const handleUsernameChange = (id, value) => {
+    const handleUsernameChange = (id: string, value: string) => {
         setUsernames(prev => ({ ...prev, [id]: value }));
     };
 
-    const supportMeData = SupportData.shieldIcons || []
+    const supportMeData = useMemo(() => SupportData.shieldIcons || [], [])
 
     const {
         alignment,
         icons: selectedIcons,
-        selectedProvider,
         selectedStyle,
         addIcon,
         setAlignment,
@@ -39,10 +37,8 @@ const Support = () => {
         setGap,
         setIconHeight,
         setIcons,
-        setSelectedProvider,
         setSelectedStyle
     } = useSupportStore()
-
 
     useEffect(() => {
         Object.entries(usernames).forEach(([id, username]) => {
@@ -56,9 +52,6 @@ const Support = () => {
         });
     }, [usernames, selectedStyle, supportMeData, addIcon, removeIcon]);
 
-
-    console.log("icons", selectedIcons)
-
     return (
         <Tabs defaultValue='select' className='w-full'>
             <TabsList className='grid w-full grid-cols-2 gap-4 rounded-lg h-12 px-2'>
@@ -66,36 +59,22 @@ const Support = () => {
                 <TabsTrigger value='setting' className='rounded-lg border border-gray-300'>Setting</TabsTrigger>
             </TabsList>
             <TabsContent value='select'>
-                <Card className=' w-full p-0 flex flex-col border-none gap-4'>
+                <Card className='w-full p-0 flex flex-col border-none gap-4'>
                     <CardTitle>Support Me</CardTitle>
                     <CardContent className='p-0'>
-                        <div className='flex items-center gap-4'>
-                            <Select onValueChange={handleProviderChange} defaultValue="shieldIcons">
-                                <SelectTrigger className="w-[200px]">
-                                    <SelectValue placeholder="Select Provider" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="shieldIcons">Shields Icons</SelectItem>
-                                    <SelectItem value="simpleIcons">Simple Icons</SelectItem>
-                                </SelectContent>
-                            </Select>
-                            {selectedProvider === 'shieldIcons' && (
-                                <Select onValueChange={handleStyleChange} defaultValue="flat">
-                                    <SelectTrigger className="w-[200px]">
-                                        <SelectValue placeholder="Select Style" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="flat">Flat</SelectItem>
-                                        <SelectItem value="flat-square">Flat-Square</SelectItem>
-                                        <SelectItem value="plastic">Plastic</SelectItem>
-                                        <SelectItem value="for-the-badge">For-the-Badge</SelectItem>
-                                    </SelectContent>
-                                </Select>
-                            )}
-                        </div>
-
+                        <Select onValueChange={handleStyleChange} defaultValue="flat">
+                            <SelectTrigger className="w-[200px]">
+                                <SelectValue placeholder="Select Style" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="flat">Flat</SelectItem>
+                                <SelectItem value="flat-square">Flat-Square</SelectItem>
+                                <SelectItem value="plastic">Plastic</SelectItem>
+                                <SelectItem value="for-the-badge">For-the-Badge</SelectItem>
+                            </SelectContent>
+                        </Select>
                     </CardContent>
-                    <CardContent className='p-0 mt-4 grid grid-cols-2 gap-4'>
+                    <CardContent className='pb-10 md:p-0 mt-4 grid sm:grid-cols-2 gap-4'>
                         {supportMeData.map((support) => (
                             <Card key={support.id} className='flex flex-col justify-center items-center p-2 h-28 cursor-pointer shadow-md'>
                                 <img
@@ -107,7 +86,7 @@ const Support = () => {
                                     placeholder='Enter Username'
                                     value={usernames[support.id] || ''}
                                     onChange={(e) => handleUsernameChange(support.id, e.target.value)}
-                                    className=' border-black/20 self-start mt-2'
+                                    className='border-black/20 self-start mt-2'
                                 />
                             </Card>
                         ))}
