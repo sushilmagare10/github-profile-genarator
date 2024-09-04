@@ -13,6 +13,12 @@ export const SocialData = {
             href: (username: string) => `https://bitbucket.org/${username}`
         },
         {
+            id: "gmail",
+            label: "Gmail",
+            url: "https://img.shields.io/badge/Gmail-D14836?logo=gmail&logoColor=white",
+            href: (email: string) => `${email}`
+        },
+        {
             id: "codechef",
             label: "Codechef",
             url: "https://img.shields.io/badge/Codechef-%23B92B27.svg?&logo=Codechef&logoColor=white",

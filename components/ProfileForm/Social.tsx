@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { Card, CardContent, CardTitle } from '../ui/card'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
 import { SocialData } from '@/data/SocialData'
@@ -9,19 +9,19 @@ import useSocialStore from '@/store/SocialStore'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
 import Setting from './Setting'
 
-const Social = () => {
-    const [selectedStyle, setSelectedStyle] = useState('flat')
-    const [usernames, setUsernames] = useState({})
 
-    const handleStyleChange = (value) => {
-        console.log('Selected style:', value);
-        setSelectedStyle(value);
-    }
-    const handleUsernameChange = (id, value) => {
+type Usernames = {
+    [id: string]: string;
+};
+
+const Social = () => {
+    const [usernames, setUsernames] = useState<Usernames>({})
+    const handleUsernameChange = (id: any, value: any) => {
         setUsernames(prev => ({ ...prev, [id]: value }));
     }
 
-    const socialData = SocialData.shieldIcons || []
+    const socialData = useMemo(() => SocialData.shieldIcons || [], []);
+
 
     const {
         addIcon,
@@ -29,15 +29,20 @@ const Social = () => {
         icons,
         sectionStyle,
         setGap,
+        selectedStyle,
+        setSelectedStyle,
         setSectionStyle,
         setIconHeight,
         setIcons,
 
     } = useSocialStore()
 
-
+    const handleStyleChange = (value: any) => {
+        setSelectedStyle(value);
+    };
 
     useEffect(() => {
+
         Object.entries(usernames).forEach(([id, username]) => {
             const social = socialData.find(s => s.id === id)
             if (social && username) {
@@ -59,8 +64,8 @@ const Social = () => {
             <TabsContent value="select">
                 <Card className='w-full p-4 flex flex-col border border-gray-200 rounded-lg shadow-sm'>
                     <CardTitle className='mt-2'>Social</CardTitle>
-                    <CardContent className='p-0'>
-                        <Select onValueChange={handleStyleChange} defaultValue="flat">
+                    <CardContent className='p-0 mt-2'>
+                        <Select onValueChange={handleStyleChange} defaultValue="for-the-badge">
                             <SelectTrigger className="w-[200px]">
                                 <SelectValue placeholder="Select Style" />
                             </SelectTrigger>
@@ -72,7 +77,7 @@ const Social = () => {
                             </SelectContent>
                         </Select>
                     </CardContent>
-                    <CardContent className='p-0 mt-4 grid grid-cols-2 gap-4'>
+                    <CardContent className='pb-10 md:p-0 mt-4 grid sm:grid-cols-2 gap-4'>
                         {socialData.map((social) => {
                             return (
                                 <Card key={social.id} className='flex flex-col justify-center items-center border border-gray-200 p-2 h-28 cursor-pointer shadow-md'>
