@@ -6,6 +6,8 @@ import { Button } from '../ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { motion, Reorder } from "framer-motion";
 
+
+
 const Setting = ({
     icons,
     sectionStyle,
@@ -15,7 +17,7 @@ const Setting = ({
     setIcons,
     removeIcon,
     gapOptions = ["xs", "sm", "md", "lg", "xl"],
-    heightOptions = ["xs", "sm", "md", "lg", "xl"],
+    heightOptions = ["xs", "sm", "md", "lg", "xl", "xxl"],
     alignmentOptions = ["left", "center", "right"],
     title = "Edit"
 }) => {
@@ -27,8 +29,8 @@ const Setting = ({
             <CardHeader className='p-0'>
                 <CardTitle className='text-lg font-semibold text-gray-800'>{title}</CardTitle>
             </CardHeader>
-            <CardContent className='flex flex-col w-full gap-y-6 mt-4'>
-                <div className='flex justify-between -mt-1'>
+            <CardContent className='flex flex-col w-full gap-y-6 pb-40 md:pb-4 mt-4'>
+                <div className='flex flex-col justify-between -mt-1'>
                     <div className='flex flex-col'>
                         <h3 className='font-medium text-gray-700'>Alignment</h3>
                         <div className='flex items-center gap-2 mt-2'>
@@ -45,13 +47,13 @@ const Setting = ({
                         </div>
                     </div>
 
-                    <div className='flex flex-col gpa-3 '>
-                        <h3 className='font-medium text-gray-700'>Icon Style</h3>
-                        <div className='flex items-center gap-x-4 mt-2'>
+                    <div className='flex flex-col gap-3 '>
+                        <h3 className='font-medium text-gray-700 mt-4'>Icon Style</h3>
+                        <div className='flex items-center gap-x-4 '>
                             <div className='flex flex-col'>
                                 <label className='text-sm font-semibold text-gray-600 mb-1'>Height</label>
-                                <Select onValueChange={(value) => setIconHeight(value)} defaultValue="sm">
-                                    <SelectTrigger className="w-[150px] bg-gray-100 border border-gray-300 rounded-md">
+                                <Select onValueChange={(value) => setIconHeight(value)} defaultValue="lg">
+                                    <SelectTrigger className="w-[120px] bg-gray-100 border border-gray-300 rounded-md">
                                         <SelectValue placeholder="Select Height" />
                                     </SelectTrigger>
                                     <SelectContent>
@@ -65,8 +67,8 @@ const Setting = ({
                             </div>
                             <div className='flex flex-col'>
                                 <label className='text-sm font-semibold text-gray-600 mb-1'>Gap</label>
-                                <Select onValueChange={(value) => setGap(value)} defaultValue="sm">
-                                    <SelectTrigger className="w-[150px] bg-gray-100 border border-gray-300 rounded-md">
+                                <Select onValueChange={(value) => setGap(value)} defaultValue="xs">
+                                    <SelectTrigger className="w-[120px] bg-gray-100 border border-gray-300 rounded-md">
                                         <SelectValue placeholder="Select Gap" />
                                     </SelectTrigger>
                                     <SelectContent>
@@ -96,7 +98,7 @@ const Setting = ({
                                 </div>
                             ) : (
                                 <Reorder.Group values={icons} onReorder={(newOrder) => setIcons(newOrder)}>
-                                    {icons.map(icon => (
+                                    {icons.map((icon: any) => (
                                         <Reorder.Item
                                             value={icon}
                                             key={icon.id}
