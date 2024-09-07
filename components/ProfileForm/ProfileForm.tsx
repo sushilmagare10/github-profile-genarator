@@ -29,8 +29,7 @@ const ProfileForm = () => {
     }
 
     return (
-        <div className=' sticky top-4 flex flex-col w-full justify-start items-center gap-4 bg-card p-4 h-full min-h-screen border border-black/25 shadow-lg rounded-lg'>
-
+        <div className=' lg:sticky lg:top-0 flex flex-col w-full  justify-start items-center gap-4 bg-card p-4 h-full overflow-scroll scrollbar-hide  border border-gray-300 shadow-lg rounded-lg'>
             {renderActionSection()}
         </div>
     )
