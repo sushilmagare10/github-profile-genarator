@@ -43,12 +43,6 @@ const SocialData = {
             url: "https://img.shields.io/badge/Twitter-000000?logo=X&logoColor=white",
             href: (username: string) => `https://twitter.com/${username}`
         },
-        {
-            id: "gmail",
-            label: "Gmail",
-            url: "https://img.shields.io/badge/Gmail-D14836?logo=gmail&logoColor=white",
-            href: (email: string) => `mailto:${email}`
-        },
     ],
 };
 
@@ -78,7 +72,6 @@ const initializeStore = () => {
         { id: "github", url: SocialData.shieldIcons.find(icon => icon.id === "github")!.url, href: SocialData.shieldIcons.find(icon => icon.id === "github")!.href("sushilmagare10") },
         { id: "linkedin", url: SocialData.shieldIcons.find(icon => icon.id === "linkedin")!.url, href: SocialData.shieldIcons.find(icon => icon.id === "linkedin")!.href("sushil-magare") },
         { id: "twitter", url: SocialData.shieldIcons.find(icon => icon.id === "twitter")!.url, href: SocialData.shieldIcons.find(icon => icon.id === "twitter")!.href("Sushil__SM") },
-        { id: "gmail", url: SocialData.shieldIcons.find(icon => icon.id === "gmail")!.url, href: SocialData.shieldIcons.find(icon => icon.id === "gmail")!.href("sushilmagare10@gmail.com") },
     ];
     store.setIcons(dummyIcons);
 };
