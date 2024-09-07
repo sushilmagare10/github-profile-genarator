@@ -1,15 +1,18 @@
 import React from 'react';
 import { Checkbox } from '../ui/checkbox';
-import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
-import useIntroductionStore from '@/store/IntroStore'; // Adjust the import path as needed
+import useIntroductionStore from '@/store/IntroStore';
 
-type FieldStyle = ReturnType<typeof useIntroductionStore>['fieldStyles']['headerImage'];
 
-interface StyleOptionsProps {
-    style: FieldStyle;
-    onStyleChange: (style: Partial<FieldStyle>) => void;
+type StyleProps = {
+    bold: boolean;
+    alignment: 'left' | 'center' | 'right';
+}
+
+type StyleOptionsProps = {
+    style: StyleProps;
+    onStyleChange: (style: Partial<StyleProps>) => void;
     sectionName: string;
 }
 
@@ -17,28 +20,12 @@ const StyleOptions = ({ style, onStyleChange, sectionName }: StyleOptionsProps) 
     return (
         <div className="flex flex-col mt-2">
             <h4 className="font-semibold">{sectionName} Style Options:</h4>
-            <div className="flex items-center gap-3 mt-2">
+            <div className="flex items-center gap-4 mt-2">
+                <Label>Bold</Label>
                 <Checkbox
                     checked={style.bold}
                     onCheckedChange={(checked) => onStyleChange({ bold: !!checked })}
                 />
-                <Label>Bold</Label>
-
-                <Checkbox
-                    checked={style.italic}
-                    onCheckedChange={(checked) => onStyleChange({ italic: !!checked })}
-                />
-                <Label>Italic</Label>
-            </div>
-            <div className="flex items-center gap-2 mt-2">
-                <Label>Font Size:</Label>
-                <Input
-                    type="number"
-                    value={style.fontSize}
-                    onChange={(e) => onStyleChange({ fontSize: Number(e.target.value) })}
-                    className="w-20"
-                />
-
                 <Label>Alignment:</Label>
                 <Select
                     value={style.alignment}
@@ -53,9 +40,6 @@ const StyleOptions = ({ style, onStyleChange, sectionName }: StyleOptionsProps) 
                         <SelectItem value="right">Right</SelectItem>
                     </SelectContent>
                 </Select>
-            </div>
-            <div className="flex items-center space-x-2">
-
             </div>
         </div>
     );
