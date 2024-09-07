@@ -6,7 +6,7 @@ import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 import { Switch } from '../ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
-import useStatsCardStore, { Card, CardType, RepoCardProps, StatsCardProps, StreakCardProps, TopLangsCardProps } from '@/store/StatsCardStore';
+import useStatsCardStore, { Card, CommonCardProps, CardType, RepoCardProps, StatsCardProps, StreakCardProps, TopLangsCardProps } from '@/store/StatsCardStore';
 import { Button } from '../ui/button';
 import {
     locales,
@@ -49,13 +49,15 @@ const StatsCard = () => {
     };
 
     const handleAddCard = (type: CardType) => {
-        const newCard = addCard(type);
-        if (newCard) {
-            setSelectedCardIndex(cards.length);
+        const newCardIndex = cards.length;
+        addCard(type);
+        if (cards.length > newCardIndex) {
+            setSelectedCardIndex(newCardIndex);
         } else if (type !== 'repo-card') {
             console.log(`A ${type} card already exists`);
         }
     };
+
     const handleRemoveCard = (index: number) => {
         removeCard(index);
         setSelectedCardIndex(null);
@@ -73,12 +75,12 @@ const StatsCard = () => {
                     <Input
                         type="text"
                         placeholder="Title Color"
-                        value={card.title_color || ''}
+                        value={(card as CommonCardProps).title_color || ''}
                         onChange={(e) => handleUpdateCard(index, { title_color: e.target.value })} />
                     <Input
                         type="text"
                         placeholder="Text Color"
-                        value={card.text_color || ''}
+                        value={(card as CommonCardProps).text_color || ''}
                         onChange={(e) => handleUpdateCard(index, { text_color: e.target.value })}
                     />
                 </div>
@@ -86,13 +88,13 @@ const StatsCard = () => {
                     <Input
                         type="text"
                         placeholder="Icon Color"
-                        value={card.icon_color || ''}
+                        value={(card as CommonCardProps).icon_color || ''}
                         onChange={(e) => handleUpdateCard(index, { icon_color: e.target.value })}
                     />
                     <Input
                         type="text"
                         placeholder="Border Color"
-                        value={card.border_color || ''}
+                        value={(card as CommonCardProps).border_color || ''}
                         onChange={(e) => handleUpdateCard(index, { border_color: e.target.value })}
                     />
                 </div>
@@ -101,7 +103,7 @@ const StatsCard = () => {
                         <Input
                             type="text"
                             placeholder="Background Color"
-                            value={card.bg_color || ''}
+                            value={(card as CommonCardProps).bg_color || ''}
                             className='w-full'
                             onChange={(e) => handleUpdateCard(index, { bg_color: e.target.value })}
                         />

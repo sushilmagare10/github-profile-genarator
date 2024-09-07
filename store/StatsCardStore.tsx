@@ -156,7 +156,7 @@ const CardData = {
     dummyCards: [
         {
             type: 'stats' as const,
-            theme: 'dracula',
+            theme: 'react',
             hide_title: false,
             hide_rank: false,
             show_icons: false,
@@ -166,17 +166,17 @@ const CardData = {
         },
         {
             type: 'top-langs' as const,
-            theme: "buefy",
+            theme: "react",
             hide_title: false,
             layout: 'compact',
             langs_count: 6,
             hide_progress: false,
-            card_width: 495,
+            card_width: 400,
 
         },
         {
             type: 'streak' as const,
-            theme: 'jolly',
+            theme: 'react',
             hide_border: false,
             date_format: "M j[, Y]",
             mode: 'daily',
@@ -203,17 +203,23 @@ const useStatsCardStore = create<StatsCardStore>((set) => ({
     cards: [],
     addedCardTypes: new Set<CardType>(),
     setUsername: (username) => set({ username }),
+
     addCard: (type) => {
-        let newCard: Card | null = null;
+        let cardAdded = false;
         set((state) => {
             if (type !== 'repo-card' && state.cards.some(card => card.type === type)) {
                 return state;
             }
-            newCard = { type } as Card;
-            return { cards: [...state.cards, newCard] };
+            const newCard = getDefaultProps(type);
+            cardAdded = true;
+            return {
+                cards: [...state.cards, newCard],
+                addedCardTypes: new Set([...Array.from(state.addedCardTypes), type])
+            };
         });
-        return newCard;
+        return cardAdded;
     },
+
     removeCard: (index) => set((state) => {
         const removedCard = state.cards[index];
         const newCards = state.cards.filter((_, i) => i !== index);
@@ -225,9 +231,10 @@ const useStatsCardStore = create<StatsCardStore>((set) => ({
 
         return {
             cards: newCards,
-            addedCardTypes: newAddedCardTypes
+            addedCardTypes: new Set(Array.from(newAddedCardTypes))
         };
     }),
+
     updateCard: (index, updates) => set((state) => ({
         cards: state.cards.map((card, i) => i === index ? { ...card, ...updates } : card)
     })),
