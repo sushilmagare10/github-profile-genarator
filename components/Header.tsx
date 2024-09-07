@@ -1,11 +1,11 @@
 "use client"
 
+
 import Link from 'next/link'
 import React, { useState, useEffect } from 'react'
 import MarkdownGenerator from './MarkdownGenerator'
-import { IoLogoGithub, IoIosShareAlt, IoMdHeart } from "react-icons/io"
+import { IoLogoGithub, IoMdHeart } from "react-icons/io"
 import { motion } from "framer-motion"
-import axios from 'axios'
 
 const Header = () => {
     const [starCount, setStarCount] = useState(0)
@@ -13,8 +13,9 @@ const Header = () => {
     useEffect(() => {
         const fetchStarCount = async () => {
             try {
-                const response = await axios.get('https://api.github.com/repos/sushilmagare10/github-profile-genarator')
-                setStarCount(response.data.stargazers_count)
+                const response = await fetch('https://api.github.com/repos/sushilmagare10/github-profile-genarator')
+                const data = await response.json()
+                setStarCount(data.stargazers_count)
             } catch (error) {
                 console.error('Error fetching star count:', error)
             }
