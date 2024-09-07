@@ -34,26 +34,34 @@ const MarkdownGenerator = () => {
     }
 
     if (name) {
-      markdown += `# <h3 align="${fieldStyles.name.alignment}">${name}</h3>\n`;
+      markdown += `<div id="toc">\n`;
+      markdown += `  <ul align="${fieldStyles.name.alignment}" style="list-style: none">\n`;
+      markdown += `    <summary>\n`;
+      markdown += `      <h1>\n`;
+      markdown += `        ${name}\n`;
+      markdown += `      </h1>\n`;
+      markdown += `    </summary>\n`;
+      markdown += `  </ul>\n`;
+      markdown += `</div>\n\n`;
     }
 
     if (socialIcons.length > 0) {
-      markdown += `<h3 align="${sectionStyle}">Connect with me:</h3> \n`;
+      markdown += `**<h3 align="${sectionStyle}">Connect with me:</h3>** \n`;
       markdown += `<p align="${sectionStyle}">`;
       markdown += socialIcons
         .filter(icon => icon.href)
         .map(icon =>
           `<a href="${icon.href}" target="_blank"><img src="${icon.url}" height="${heightValues[socialIconHeight]}" style="margin-right: ${gapValues[gap]}px"></a>`
         ).join(' ');
-      markdown += '</p>\n';
+      markdown += '</p>\n\n';
     }
 
     if (aboutMe) {
-      markdown += ` <h3 align="${fieldStyles.aboutMe.alignment}">${aboutMe}</h3>\n\n`;
+      markdown += ` **<h3 align="${fieldStyles.aboutMe.alignment}">${aboutMe}</h3>**\n\n`;
     }
 
     if (Object.values(currentlyDoing).some(value => value)) {
-      markdown += `## Rapid Fire\n\n`;
+      markdown += `**<h3 align="left">Rapid Fire</h3>**\n\n`;
       const fields = [
         { emoji: '💼', label: 'I\'m currently working on', value: currentlyDoing.working },
         { emoji: '🌱', label: 'I\'m currently learning', value: currentlyDoing.learning },
@@ -77,16 +85,16 @@ const MarkdownGenerator = () => {
     }
 
     if (skillIcons.length > 0) {
-      markdown += ` <h3 align="${alignment}">Skills</h3>\n`;
+      markdown += ` **<h3 align="${alignment}">Skills</h3>**\n\n`;
       markdown += `<p align="${alignment}">`;
       markdown += skillIcons.map(icon =>
         `<img src="${icon.url}" height="${heightValues[skillIconHeight]}" alt="${icon.label}" style="margin-right: ${gapValues[skillIconsGap]}px">`
       ).join(' ');
-      markdown += '</p>';
+      markdown += '</p>\n\n';
     }
 
     if (cards.length > 0) {
-      markdown += `<h3 align="center">GitHub Stats</h3>\n`;
+      markdown += ` **<h3 align="left">GitHub Stats</h3>**\n\n`;
       for (let i = 0; i < cards.length; i += 2) {
         const card1 = cards[i];
         const card2 = i + 1 < cards.length ? cards[i + 1] : null;
@@ -106,28 +114,26 @@ const MarkdownGenerator = () => {
           }
         };
 
-        const addParams = (url: string, card: any) => {
-          const params = Object.entries(card)
-            .filter(([k, v]) => k !== 'type' && k !== 'repo' && v !== undefined && v !== '')
-            .map(([k, v]) => `&${k}=${v}`)
-            .join('');
-          return url + params;
+        const addParams = (url: string, card: any): string => {
+          const params = new URLSearchParams(
+            Object.entries(card)
+              .filter(([k, v]) => k !== 'type' && k !== 'repo' && v !== undefined && v !== '')
+              .reduce((acc, [k, v]) => ({ ...acc, [k]: v }), {})
+          ).toString();
+          return `${url}${params ? `&${params}` : ''}`;
         };
 
-        markdown += `<p align="center">\n`;
+
+        markdown += `<p align="left">\n`;
 
         // First card
         let cardUrl1 = addParams(getCardUrl(card1), card1);
-        markdown += `  <a href="https://github.com/${username}${card1.type === 'repo-card' ? `/${(card1 as RepoCardProps).repo}` : ''}">\n`;
-        markdown += `    <img height="200" width="48%" src="${cardUrl1}" alt="GitHub ${card1.type} Card" />\n`;
-        markdown += `  </a>\n`;
+        markdown += `  <img width="48%" src="${cardUrl1}" alt="GitHub ${card1.type} Card" />\n`;
 
-        // Second card if exists)
+        // Second card if exists
         if (card2) {
           let cardUrl2 = addParams(getCardUrl(card2), card2);
-          markdown += `  <a href="https://github.com/${username}${card2.type === 'repo-card' ? `/${(card2 as RepoCardProps).repo}` : ''}">\n`;
-          markdown += `    <img height="200" width="48%" src="${cardUrl2}" alt="GitHub ${card2.type} Card" />\n`;
-          markdown += `  </a>\n`;
+          markdown += `  <img width="48%" src="${cardUrl2}" alt="GitHub ${card2.type} Card" />\n`;
         }
 
         markdown += `</p>\n\n`;
@@ -135,7 +141,7 @@ const MarkdownGenerator = () => {
     }
 
     if (SupportIcons.length > 0) {
-      markdown += ` <h3 align="${SupportAlignment}">Support Me</h3>\n`;
+      markdown += ` **<h3 align="${SupportAlignment}">Support Me</h3>**\n\n`;
       markdown += `<p align="${SupportAlignment}">`;
       markdown += SupportIcons
         .filter(icon => icon.href)
