@@ -62,7 +62,6 @@ const initializeStore = () => {
         { id: "Python-skillicons", label: "Python", url: "https://skillicons.dev/icons?i=python" },
         { id: "React-Devicons-1", label: "React", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
         { id: "Tailwind CSS-Devicons-1", label: "Tailwind CSS", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
-        { id: "Express-Devicons-2", label: "Express", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original-wordmark.svg" },
         { id: "Prisma-Devicons-2", label: "Prisma", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original-wordmark.svg" },
         { id: "Next.js-Devicons-1", label: "Next.js", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
 
