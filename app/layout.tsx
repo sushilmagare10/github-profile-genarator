@@ -5,8 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "GRG",
-  description: "Github Readme Generator",
+  title: "Github Profile Generator",
+  description: "Github Profile Generator",
 };
 
 export default function RootLayout({
