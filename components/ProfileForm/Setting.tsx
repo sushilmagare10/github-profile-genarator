@@ -20,6 +20,18 @@ const Setting = ({
     heightOptions = ["xs", "sm", "md", "lg", "xl", "xxl"],
     alignmentOptions = ["left", "center", "right"],
     title = "Edit"
+}: {
+    icons: any;
+    sectionStyle: any;
+    setGap: any;
+    setSectionStyle: any;
+    setIconHeight: any;
+    setIcons: any;
+    removeIcon: any;
+    gapOptions?: string[] | undefined;
+    heightOptions?: string[] | undefined;
+    alignmentOptions?: string[] | undefined;
+    title?: string | undefined;
 }) => {
 
     const isEmpty = icons && icons.length === 0;
