@@ -48,8 +48,8 @@ const useIntroductionStore = create<IntroductionState>((set) => ({
         askMeAbout: '💡 JavaScript, React, Node.js, MongoDB, and RESTful APIs',
         funFact: '🎢 I once debugged a issue while on a roller coaster!',
         portfolio: '🔗 https://sushilmagare.dev/portfolio',
-        website: '🌐 https://sushilmagare.dev',
-        blog: '✍️ https://sushilmagare.dev/blog'
+        website: '',
+        blog: ''
     },
     fieldStyles: {
         headerImage: { bold: false, fontSize: 16, margin: 0, alignment: 'center' },
