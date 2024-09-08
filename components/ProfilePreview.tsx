@@ -158,12 +158,12 @@ const ProfilePreview = () => {
               <ul className='list-disc list-inside space-y-1'>
                 {currentlyDoing.working && (
                   <li className='flex items-center text-lg'>
-                    <span className='mr-2'>💼</span> I'm currently working on: <strong className='ml-2'>{renderHTML(currentlyDoing.working)}</strong>
+                    <span className='mr-2'>💼</span> I&apos;m currently working on: <strong className='ml-2'>{renderHTML(currentlyDoing.working)}</strong>
                   </li>
                 )}
                 {currentlyDoing.learning && (
                   <li className='flex items-center text-lg'>
-                    <span className='mr-2'>🌱</span> I'm currently learning: <strong className='ml-2'>{renderHTML(currentlyDoing.learning)}</strong>
+                    <span className='mr-2'>🌱</span> I&apos;m currently learning: <strong className='ml-2'>{renderHTML(currentlyDoing.learning)}</strong>
                   </li>
                 )}
                 {currentlyDoing.askMeAbout && (
@@ -254,7 +254,6 @@ const ProfilePreview = () => {
                 >
                   <img
                     src={icon.url}
-                    alt={icon.label}
                     className='rounded-md shadow-md'
                     style={{ height: `${heightValues[SupportIconsHeight]}px` }}
                   />
