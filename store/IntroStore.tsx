@@ -47,7 +47,7 @@ const useIntroductionStore = create<IntroductionState>((set) => ({
         learning: '📚 Exploring Zustand',
         askMeAbout: '💡 JavaScript, React, Node.js, MongoDB, and RESTful APIs',
         funFact: '🎢 I once debugged a issue while on a roller coaster!',
-        portfolio: '🔗 https://sushilmagare.dev/portfolio',
+        portfolio: '',
         website: '',
         blog: ''
     },
