@@ -212,7 +212,7 @@ export const SkillsData = {
             { id: "TravisCI-shields", label: "Travis CI", url: "https://img.shields.io/badge/TravisCI-3D3D3D?logo=travis-ci&logoColor=white" },
             { id: "Buildkite-shields", label: "Buildkite", url: "https://img.shields.io/badge/Buildkite-00A3E0?logo=buildkite&logoColor=white" }
     ],
-         "Baas": [
+        "Baas": [
         { id: "Firebase-shields", label: "Firebase", url: "https://img.shields.io/badge/Firebase-FFCA28?logo=firebase&logoColor=white" },
         { id: "AWS Amplify-shields", label: "AWS Amplify", url: "https://img.shields.io/badge/AWS_Amplify-FF9900?logo=aws-amplify&logoColor=white" },
         { id: "Supabase-shields", label: "Supabase", url: "https://img.shields.io/badge/Supabase-3ECF8E?logo=supabase&logoColor=white" },

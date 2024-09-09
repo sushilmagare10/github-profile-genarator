@@ -98,13 +98,12 @@ const StatsCard = () => {
                         onChange={(e) => handleUpdateCard(index, { border_color: e.target.value })}
                     />
                 </div>
-                <div className='flex justify-between items-center gap-4'>
+                <div className='flex w-full justify-between items-center gap-4'>
                     <div className='relative w-full flex justify-between items-center'>
                         <Input
                             type="text"
                             placeholder="Background Color"
                             value={(card as CommonCardProps).bg_color || ''}
-                            className='w-full'
                             onChange={(e) => handleUpdateCard(index, { bg_color: e.target.value })}
                         />
                         <TooltipProvider>
@@ -125,12 +124,14 @@ const StatsCard = () => {
                             </Tooltip>
                         </TooltipProvider>
                     </div>
-                    <Input
-                        type="number"
-                        placeholder="Border Radius"
-                        value={card.border_radius || ''}
-                        onChange={(e) => handleUpdateCard(index, { border_radius: parseFloat(e.target.value) || undefined })}
-                    />
+                    <div className='w-full'>
+                        <Input
+                            type="number"
+                            placeholder="Border Radius"
+                            value={card.border_radius || ''}
+                            onChange={(e) => handleUpdateCard(index, { border_radius: parseFloat(e.target.value) || undefined })}
+                        />
+                    </div>
                 </div>
                 <div className='flex justify-between items-center gap-4'>
                     <Select
@@ -451,12 +452,14 @@ const StatsCard = () => {
                                     </Tooltip>
                                 </TooltipProvider>
                             </div>
-                            <Input
-                                type="text"
-                                placeholder="Border Color"
-                                value={(card as StreakCardProps).border || ''}
-                                onChange={(e) => handleUpdateCard(index, { border: e.target.value })}
-                            />
+                            <div className='w-full'>
+                                <Input
+                                    type="text"
+                                    placeholder="Border Color"
+                                    value={(card as StreakCardProps).border || ''}
+                                    onChange={(e) => handleUpdateCard(index, { border: e.target.value })}
+                                />
+                            </div>
                         </div>
                         <div className='flex justify-start items-center gap-4 '>
                             <Input
@@ -486,12 +489,13 @@ const StatsCard = () => {
                                 onChange={(e) => handleUpdateCard(index, { currStreakNum: e.target.value })}
                             />
                         </div>
-                        <div className='flex justify-start items-center gap-4 '>                            <Input
-                            type="text"
-                            placeholder="Side Numbers Color"
-                            value={(card as StreakCardProps).sideNums || ''}
-                            onChange={(e) => handleUpdateCard(index, { sideNums: e.target.value })}
-                        />
+                        <div className='flex justify-start items-center gap-4 '>
+                            <Input
+                                type="text"
+                                placeholder="Side Numbers Color"
+                                value={(card as StreakCardProps).sideNums || ''}
+                                onChange={(e) => handleUpdateCard(index, { sideNums: e.target.value })}
+                            />
                             <Input
                                 type="text"
                                 placeholder="Current Streak Label Color"
@@ -528,8 +532,10 @@ const StatsCard = () => {
                                     <SelectValue placeholder="Select date format" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                    {dateFormats.map((format) => (
-                                        <SelectItem key={format} value={format}>{format}</SelectItem>
+                                    {dateFormats.map(({ format, description }) => (
+                                        <SelectItem key={format} value={format}>
+                                            {`${description}`}
+                                        </SelectItem>
                                     ))}
                                 </SelectContent>
                             </Select>
@@ -635,7 +641,6 @@ const StatsCard = () => {
                         placeholder="Enter your GitHub username"
                     />
                 </div>
-
                 <div className="grid grid-cols-2 gap-4 mb-4 h-56">
                     {(['stats', 'top-langs', 'repo-card', 'streak'] as CardType[]).map((type) => (
                         <div
@@ -662,7 +667,7 @@ const StatsCard = () => {
                             className={`relative flex w-full flex-col items-center p-4 rounded-md gap-4 border border-gray-200 overflow-hidden cursor-pointer ${selectedCardIndex === index ? 'border-primary border' : 'hover:border-gray-400'}`}
                         >
                             <button
-                                className="absolute top-2 right-2 text-destructive z-10"
+                                className="absolute top-2 right-2 w-8 h-8 font-bold rounded-full border border-black/30 bg-neutral-50 text-destructive z-10"
                                 onClick={() => handleRemoveCard(index)}
                             >
                                 ✕
@@ -675,7 +680,26 @@ const StatsCard = () => {
                             />
                             {selectedCardIndex === index && (
                                 <div className="mt-4 p-4 w-full bg-card shadow-md rounded-md">
-                                    <h3 className="font-bold mb-2">Card Settings</h3>
+                                    <div className=' flex justify-between items-center '>
+                                        <h3 className="font-bold mb-2">Card Settings</h3>
+                                        <TooltipProvider>
+                                            <Tooltip>
+                                                <TooltipTrigger>
+                                                    <div className='w-5 h-5  flex justify-center items-center rounded-full bg-secondary border'>
+                                                        <span className=' font-bold text-gray-500 cursor-pointer'>?</span>
+                                                    </div>
+                                                </TooltipTrigger>
+                                                <TooltipContent className='w-80 p-2 bg-secondary flex flex-col gap-2 shadow-lg'>
+                                                    <span>
+                                                        To customize the Colors, enter hex values without the `#` symbol.
+                                                    </span>
+                                                    <span>
+                                                        eg: 784BA0
+                                                    </span>
+                                                </TooltipContent>
+                                            </Tooltip>
+                                        </TooltipProvider>
+                                    </div>
                                     {renderCardSettings(card, index)}
                                 </div>
                             )}

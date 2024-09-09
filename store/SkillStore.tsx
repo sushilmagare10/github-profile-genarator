@@ -31,7 +31,7 @@ const useSkillsStore = create<SkillsStore>((set) => ({
     selectedStyle: 'for-the-badge',
     selectedCategory: 'Languages',
     icons: [],
-    iconHeight: 'md',
+    iconHeight: 'sm',
     gap: 'xs',
     alignment: 'left',
     setSelectedProvider: (provider) => set(() => ({ selectedProvider: provider })),
@@ -55,15 +55,17 @@ const useSkillsStore = create<SkillsStore>((set) => ({
 const initializeStore = () => {
     const store = useSkillsStore.getState();
     const dummyIcons: Skill[] = [
-        { id: "JavaScript-skillicons", label: "JavaScript", url: "https://skillicons.dev/icons?i=js" },
-        { id: "React-skillicons", label: "React", url: "https://skillicons.dev/icons?i=react" },
-        { id: "Node.js-skillicons", label: "Node.js", url: "https://skillicons.dev/icons?i=nodejs" },
-        { id: "TypeScript-skillicons", label: "TypeScript", url: "https://skillicons.dev/icons?i=ts" },
-        { id: "Python-skillicons", label: "Python", url: "https://skillicons.dev/icons?i=python" },
-        { id: "React-Devicons-1", label: "React", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-        { id: "Tailwind CSS-Devicons-1", label: "Tailwind CSS", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
-        { id: "Prisma-Devicons-2", label: "Prisma", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original-wordmark.svg" },
-        { id: "Next.js-Devicons-1", label: "Next.js", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
+        { id: "JavaScript-shields", label: "JavaScript", url: "https://img.shields.io/badge/JavaScript-F7DF1C?logo=javascript&logoColor=white" },
+        { id: "React-shields", label: "React", url: "https://img.shields.io/badge/React-20232A?logo=react&logoColor=61DAFB" },
+        { id: "TypeScript-shields", label: "TypeScript", url: "https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white" },
+        { id: "Nodejs-shields", label: "Node.js", url: "https://img.shields.io/badge/Node.js-8CC84B?logo=node.js&logoColor=white" },
+        { id: "TailwindCSS-shields", label: "Tailwind CSS", url: "https://img.shields.io/badge/Tailwind_CSS-38B2AC?logo=tailwind-css&logoColor=white" },
+        { id: "Prisma-shields", label: "Prisma", url: "https://img.shields.io/badge/Prisma-2D3748?logo=prisma&logoColor=white" },
+        { id: "GSAP-shields", label: "GSAP", url: "https://img.shields.io/badge/GSAP-00D084?logo=gsap&logoColor=white" },
+        { id: "Express-shields", label: "Express", url: "https://img.shields.io/badge/Express-000000?logo=express&logoColor=white" },
+        { id: "MongoDB-shields", label: "MongoDB", url: "https://img.shields.io/badge/MongoDB-4EA94B?logo=mongodb&logoColor=white" },
+        { id: "PostgreSQL-shields", label: "PostgreSQL", url: "https://img.shields.io/badge/PostgreSQL-316192?logo=postgresql&logoColor=white" },
+        { id: "MySQL-shields", label: "MySQL", url: "https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=white" },
 
     ];
     store.setIcons(dummyIcons);

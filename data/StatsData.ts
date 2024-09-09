@@ -7,7 +7,12 @@ export const layouts = ['normal', 'compact', 'donut', 'donut-vertical', 'pie'];
 
 export const numberFormats = ['short', 'long'];
 
-export const dateFormats = ["d F[, Y]", "j/n/Y", "[Y.]n.j", "M j[, Y]"];
+export const dateFormats =  [
+    { format: "d F[, Y]", description: "05 September, 2024" },
+    { format: "j/n/Y", description: "5/9/2024" },
+    { format: "[Y.]n.j", description: "2024.9.5" },
+    { format: "M j[, Y]", description: "Sep 5, 2024" }
+];
 
 export const streakModes = ['daily', 'weekly'];
 
