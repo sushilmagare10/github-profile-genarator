@@ -92,6 +92,7 @@ const Introduction = () => {
                         <span className='flex justify-between items-center gap-2'>To create custom Header use this
                             <Link
                                 href='https://leviarista.github.io/github-profile-header-generator'
+                                target='_blank'
                                 className='text-blue-600 font-semibold capitalize'
                             >
                                 github profile header generator
@@ -164,7 +165,6 @@ const Introduction = () => {
                         onStyleChange={(style) => setFieldStyle('name', style)}
                     />
                 </Section>
-
                 <Section
                     title="Add About Me"
                     icon={<FaInfoCircle className="text-purple-600 text-xl" />}

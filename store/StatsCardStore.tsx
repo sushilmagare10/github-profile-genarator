@@ -162,17 +162,7 @@ const CardData = {
             show_icons: false,
             include_all_commits: false,
             count_private: true,
-            line_height: 25
-        },
-        {
-            type: 'top-langs' as const,
-            theme: "react",
-            hide_title: false,
-            layout: 'compact',
-            langs_count: 6,
-            hide_progress: false,
-            card_width: 400,
-
+            line_height: 23
         },
         {
             type: 'streak' as const,
@@ -184,6 +174,15 @@ const CardData = {
             hide_current_streak: false,
             hide_longest_streak: false,
             card_height: 200
+        },
+        {
+            type: 'top-langs' as const,
+            theme: "react",
+            hide_title: false,
+            layout: 'compact',
+            langs_count: 6,
+            hide_progress: false,
+            card_width: 400,
         },
         {
             type: 'repo-card' as const,
