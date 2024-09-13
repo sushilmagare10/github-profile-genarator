@@ -6,15 +6,9 @@
 
 
 
-
-
-
-
-
-🎯 About
 Are you tired of manually editing your GitHub profile or missing out on adding exciting features? 😩 Configuring GitHub actions can be a hassle too, right? Say no more! 💪
 
-Introducing GitHub Profile Readme Generator, a tool that helps you beautify your GitHub profile with a customized README, easily and quickly! ✨ Add whatever content you want, wherever you want it (within markdown limits, of course). 📝
+Introducing GitHub Profile Generator, a tool that helps you beautify your GitHub profile with a customized README, easily and quickly! ✨ Add whatever content you want. 📝
 
 With this tool, creating your README has never been simpler. ⚡ Focus on showcasing your skills and projects 🚀 without spending hours formatting markdown.
 
@@ -26,3 +20,11 @@ With this tool, creating your README has never been simpler. ⚡ Focus on showca
 - 🔥**GitHub Streak Stats: Show off your longest GitHub contribution streak.**
 - 📦**GitHub Repo Card: Highlight your key repositories, fully customizable.**
 - 🎨**Full Card Customization: Easily change colors, themes, and more for all stat cards!**
+
+
+
+
+
+
+https://github.com/user-attachments/assets/a0b7b4b7-54cb-4d9d-98f7-3b26f9ac9ea3
+
