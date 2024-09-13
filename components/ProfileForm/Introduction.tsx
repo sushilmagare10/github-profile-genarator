@@ -74,12 +74,12 @@ const Introduction = () => {
                     className="w-full border-gray-300 rounded-md shadow-sm"
                 />
             )}
-            <div className='flex flex-col gap-1 justify-between'>
-                <div className='text-2xl mb-1 cursor-pointer' onClick={() => toggleEmoji(field)} >
+            <div className='flex flex-col gap-1 self-start justify-between'>
+                <div className='text-2xl  cursor-pointer' onClick={() => toggleEmoji(field)} >
                     🙂
                 </div>
                 {activeEmojiField === field && (
-                    <CardContent className='z-20 absolute top-10 right-7 md:right-0'>
+                    <CardContent className='z-30 absolute top-10 right-7 md:right-6'>
                         <Picker
                             data={data}
                             emojiSize={20}
