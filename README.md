@@ -1,36 +1,28 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+![Image 5](https://github.com/user-attachments/assets/34e09ee8-b3aa-40aa-bd8c-69d499a220e5)
+**<div align="center"><a href="https://www.github-profile-generator.in/" target="_blank">DEMO</a></div>**
 
-## Getting Started
 
-First, run the development server:
+**<h1 align="center">GITHUB PROFILE GENERATOR</h1>**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+🎯 About
+Are you tired of manually editing your GitHub profile or missing out on adding exciting features? 😩 Configuring GitHub actions can be a hassle too, right? Say no more! 💪
 
-## Deploy on Vercel
+Introducing GitHub Profile Readme Generator, a tool that helps you beautify your GitHub profile with a customized README, easily and quickly! ✨ Add whatever content you want, wherever you want it (within markdown limits, of course). 📝
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+With this tool, creating your README has never been simpler. ⚡ Focus on showcasing your skills and projects 🚀 without spending hours formatting markdown.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+**<h2>🆕 Features:</h2>**
+- 🖼️**Multiple Icons: Add several icons, and control their height, gaps, and alignment.**
+- 👁️‍🗨️**Visitor Counter Badge: Display your profile visitors with ease.**
+- 📊**GitHub Profile Stats Card: Showcase detailed stats of your GitHub profile.**
+- 🛠️**GitHub Top Skills: Display your top languages and technologies.**
+- 🔥**GitHub Streak Stats: Show off your longest GitHub contribution streak.**
+- 📦**GitHub Repo Card: Highlight your key repositories, fully customizable.**
+- 🎨**Full Card Customization: Easily change colors, themes, and more for all stat cards!**
