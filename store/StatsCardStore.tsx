@@ -145,7 +145,7 @@ const getDefaultProps = (type: CardType): Card => {
                 hide_longest_streak: false,
                 exclude_days: [],
                 locale: 'en',
-                card_height: 250
+                card_height: 200
             };
     }
 

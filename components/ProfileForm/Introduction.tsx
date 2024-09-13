@@ -11,6 +11,7 @@ import Picker from '@emoji-mart/react'
 import data from '@emoji-mart/data'
 import Link from 'next/link';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
+import { Textarea } from '../ui/textarea';
 
 type EmojiFieldType = 'name' | 'aboutMe' | 'learning' | 'askMeAbout' | 'funFact' | 'portfolio' | 'blog' | 'working';
 
@@ -55,14 +56,24 @@ const Introduction = () => {
         }
     };
 
-    const renderInput = (value: string, onChange: (e: React.ChangeEvent<HTMLInputElement>) => void, placeholder: string, field: EmojiFieldType) => (
+    const renderInput = (value: string, onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void, placeholder: string, field: EmojiFieldType) => (
         <div className='flex justify-center items-center gap-2 relative'>
-            <Input
-                value={value}
-                onChange={onChange}
-                placeholder={placeholder}
-                className="w-full border-gray-300 rounded-md shadow-sm"
-            />
+            {field === 'aboutMe' ? (
+                <Textarea
+                    value={value}
+                    onChange={onChange}
+                    placeholder={placeholder}
+                    className="w-full border-gray-300 rounded-md shadow-sm"
+                    rows={5}
+                />
+            ) : (
+                <Input
+                    value={value}
+                    onChange={onChange}
+                    placeholder={placeholder}
+                    className="w-full border-gray-300 rounded-md shadow-sm"
+                />
+            )}
             <div className='flex flex-col gap-1 justify-between'>
                 <div className='text-2xl mb-1 cursor-pointer' onClick={() => toggleEmoji(field)} >
                     🙂
