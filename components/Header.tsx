@@ -99,6 +99,9 @@ const Header = () => {
                         </motion.button>
                     </nav>
                     <div className='w-full md:w-auto flex justify-center md:justify-end'>
+                        <Link href="https://www.producthunt.com/posts/github-profile-generator?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-github&#0045;profile&#0045;generator" target="_blank">
+                            <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=489216&theme=light" alt="Github&#0032;Profile&#0032;Generator - Create&#0032;stunning&#0032;GitHub&#0032;profiles&#0032;in&#0032;seconds&#0032;with&#0032;ease&#0046;&#0032;🚀 | Product Hunt" style={{ width: "250px", height: "40px" }} width="250" height="54" />
+                        </Link>
                         <MarkdownGenerator />
                     </div>
                 </div>
