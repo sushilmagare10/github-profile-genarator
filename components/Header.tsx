@@ -50,7 +50,7 @@ const Header = () => {
     return (
         <header className='bg-secondary w-full shadow-lg border border-gray-400 rounded-md'>
             <div className='px-4 mx-auto py-4 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0'>
-                <div className='flex flex-col flex-1 w-full items-center md:items-start'>
+                <div className='flex flex-col flex-[0.8] w-full items-center md:items-start'>
                     <h1 className='text md:text-lg lg:text-2xl font-bold text-primary text-center md:text-left'>Github Profile Generator</h1>
                     <span className='text-sm text-muted-foreground text-center md:text-left'>
                         Made by{' '}
@@ -60,7 +60,7 @@ const Header = () => {
                     </span>
                 </div>
                 <div className='flex-[2] flex flex-col w-full md:flex-row justify-between gap-2 '>
-                    <nav className='flex md:flex-wrap justify-center gap-4 '>
+                    <nav className='flex md:flex-wrap w-full justify-center gap-4 mr-[18%]'>
                         <motion.div
                             variants={buttonVariants}
                             initial="initial"
@@ -98,9 +98,9 @@ const Header = () => {
                             </Link>
                         </motion.button>
                     </nav>
-                    <div className='w-full md:w-auto flex justify-center md:justify-end'>
+                    <div className='w-full  flex flex-col xl:flex-row justify-center items-center gap-4 md:justify-end'>
                         <Link href="https://www.producthunt.com/posts/github-profile-generator?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-github&#0045;profile&#0045;generator" target="_blank">
-                            <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=489216&theme=light" alt="Github&#0032;Profile&#0032;Generator - Create&#0032;stunning&#0032;GitHub&#0032;profiles&#0032;in&#0032;seconds&#0032;with&#0032;ease&#0046;&#0032;🚀 | Product Hunt" style={{ width: "250px", height: "40px" }} width="250" height="54" />
+                            <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=489216&theme=light" alt="Github&#0032;Profile&#0032;Generator - Create&#0032;stunning&#0032;GitHub&#0032;profiles&#0032;in&#0032;seconds&#0032;with&#0032;ease&#0046;&#0032;🚀 | Product Hunt" style={{ width: "220px", height: "46px" }} width="220" height="46" />
                         </Link>
                         <MarkdownGenerator />
                     </div>
