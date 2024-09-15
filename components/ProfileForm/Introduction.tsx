@@ -100,7 +100,7 @@ const Introduction = () => {
                     icon={<FaImage className="text-blue-600 text-xl" />}
                 >
                     <div className=' w-full flex justify-between items-center '>
-                        <span className='flex justify-between items-center gap-2'>To create custom Header use this
+                        <span className='flex flex-col md:flex-row justify-between items-center gap-2'>To create custom Header use this
                             <Link
                                 href='https://leviarista.github.io/github-profile-header-generator'
                                 target='_blank'

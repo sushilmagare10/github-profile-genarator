@@ -24,7 +24,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="h-screen p-3 flex overflow-hidden w-full">
+    <main className="h-screen p-4 flex overflow-hidden w-full">
       <Sidebar />
       <div className={`flex-grow flex flex-col transition-all duration-300 ${isOpen ? 'ml-6' : isMobile ? 'ml-16' : 'ml-6'}`}>
         <Header />

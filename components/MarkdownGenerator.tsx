@@ -169,7 +169,7 @@ const MarkdownGenerator = () => {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
-        <Button onClick={generateMarkdown} className='px-4 flex justify-between items-center gap-3'>
+        <Button onClick={generateMarkdown} className=' px-2 py-1 md:px-4 flex justify-between items-center gap-3'>
           <IoLogoMarkdown />
           <span className=''>
             Generate Markdown
