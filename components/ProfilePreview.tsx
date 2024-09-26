@@ -31,7 +31,9 @@ const ProfilePreview = () => {
     icons: skillIcons,
     iconHeight: skillIconHeight,
     gap: skillIconsGap,
-    alignment
+    alignment,
+    selectedProvider,
+    layout: SkillLayout,
   } = useSkillsStore();
 
   const {
@@ -85,11 +87,13 @@ const ProfilePreview = () => {
       </div>
     );
   };
+  const iconsPerRow = 6;
 
   return (
     <div className='flex flex-col justify-start items-center bg-card p-6 h-full overflow-scroll scrollbar-hide border border-gray-300 w-full shadow-lg rounded-lg'>
       <div className='h-full w-full  border-none'>
         <h1 className='text-2xl font-bold mb-4'>Profile Preview</h1>
+
         <div className='mt-2 pb-8 space-y-6'>
           {headerImage && (
             <div className='text-center'>
@@ -131,12 +135,12 @@ const ProfilePreview = () => {
                   href={icon.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className='transition transform hover:scale-105'
+                  className='transition transform '
                 >
                   <img
                     src={icon.url}
                     alt='social'
-                    className='rounded-md shadow-md'
+                    className='rounded-md '
                     style={{ height: `${heightValues[socialIconHeight]}px` }}
                   />
                 </a>
@@ -144,13 +148,11 @@ const ProfilePreview = () => {
             </div>
           </div>
 
-
           {aboutMe && (
             <div className='text-center'>
               {applyStyle(aboutMe, fieldStyles.aboutMe)}
             </div>
           )}
-
 
           {(currentlyDoing.working || currentlyDoing.learning || currentlyDoing.askMeAbout || currentlyDoing.funFact || currentlyDoing.portfolio || currentlyDoing.blog) && (
             <div className='text-left'>
@@ -190,7 +192,11 @@ const ProfilePreview = () => {
             </div>
           )}
 
+        </div>
 
+
+
+        {SkillLayout === "Layout-1" && (
           <div className='text-left'>
             <h3 className='font-bold text-xl mb-2'>Skills:</h3>
             <div
@@ -216,50 +222,87 @@ const ProfilePreview = () => {
               ))}
             </div>
           </div>
+        )}
 
-
-
-          <div className='flex flex-col w-full justify-start items-center '>
-            <h2 className='font-bold text-xl mb-2 self-start'>GitHub Stats</h2>
-            <div className='grid grid-cols-2 w-full gap-x-2 gap-y-3'>
-              {cards.map((card, index) => (
-                <img
-                  key={`${index}-${forceUpdate}`}
-                  src={getCardSrc(card)}
-                  alt={`GitHub ${card.type} Card`}
-                  style={{ maxWidth: '100%', height: 'auto' }}
-                />
-              ))}
-            </div>
+        {SkillLayout === "Layout-2" && (
+          <div className="w-full mb-4">
+            <h3 className="font-bold text-xl mb-2">Skills:</h3>
+            <table className="w-full table-auto border-collapse">
+              <tbody>
+                {Array(Math.ceil(skillIcons.length / iconsPerRow))
+                  .fill(0)
+                  .map((_, rowIndex) => (
+                    <tr key={rowIndex}>
+                      {skillIcons
+                        .slice(rowIndex * iconsPerRow, (rowIndex + 1) * iconsPerRow)
+                        .map((icon) => (
+                          <td
+                            key={icon.id}
+                            className="px-2 py-4 text-center border border-gray-300"
+                          >
+                            <div
+                              style={{
+                                display: "grid", // Set the div inside the td as a grid
+                                placeItems: `center center`, // Align both horizontally and vertically
+                              }}
+                            >
+                              <img
+                                src={icon.url}
+                                alt={icon.label}
+                                className="rounded-md"
+                                style={{ height: `${heightValues[skillIconHeight]}px` }}
+                              />
+                            </div>
+                          </td>
+                        ))}
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
           </div>
+        )}
 
 
-          <div className='text-left'>
-            <h3 className='font-bold text-xl mb-2'>Support Me:</h3>
-            <div
-              className='flex flex-wrap'
-              style={{
-                columnGap: `${gapValues[SupportIconGap]}px`,
-                rowGap: "6px",
-                justifyContent: SupportAlignment,
-              }}
-            >
-              {SupportIcons.map((icon, index) => (
-                <a
-                  key={index}
-                  href={icon.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className='transition transform hover:scale-105'
-                >
-                  <img
-                    src={icon.url}
-                    className='rounded-md shadow-md'
-                    style={{ height: `${heightValues[SupportIconsHeight]}px` }}
-                  />
-                </a>
-              ))}
-            </div>
+        <div className='flex flex-col w-full justify-start items-center '>
+          <h2 className='font-bold text-xl mb-2 self-start'>GitHub Stats</h2>
+          <div className='grid grid-cols-2 w-full gap-x-2 gap-y-3'>
+            {cards.map((card, index) => (
+              <img
+                key={`${index}-${forceUpdate}`}
+                src={getCardSrc(card)}
+                alt={`GitHub ${card.type} Card`}
+                style={{ maxWidth: '100%', height: 'auto' }}
+              />
+            ))}
+          </div>
+        </div>
+
+
+        <div className='text-left'>
+          <h3 className='font-bold text-xl mb-2'>Support Me:</h3>
+          <div
+            className='flex flex-wrap'
+            style={{
+              columnGap: `${gapValues[SupportIconGap]}px`,
+              rowGap: "6px",
+              justifyContent: SupportAlignment,
+            }}
+          >
+            {SupportIcons.map((icon, index) => (
+              <a
+                key={index}
+                href={icon.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className='transition transform hover:scale-105'
+              >
+                <img
+                  src={icon.url}
+                  className='rounded-md shadow-md'
+                  style={{ height: `${heightValues[SupportIconsHeight]}px` }}
+                />
+              </a>
+            ))}
           </div>
         </div>
       </div>

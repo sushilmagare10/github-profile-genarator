@@ -7,6 +7,9 @@ type Skill = {
     url: string
 }
 
+type Layout = 'Layout-1' | 'Layout-2';
+
+
 type SkillsStore = {
     selectedProvider: string;
     selectedStyle: string;
@@ -15,6 +18,8 @@ type SkillsStore = {
     iconHeight: HeightType;
     gap: GapType;
     alignment: AlignmentType;
+    layout: Layout;
+    setLayout: (layout: Layout) => void;
     setSelectedProvider: (provider: string) => void;
     setSelectedStyle: (style: string) => void;
     setSelectedCategory: (category: string) => void;
@@ -34,6 +39,8 @@ const useSkillsStore = create<SkillsStore>((set) => ({
     iconHeight: 'sm',
     gap: 'xs',
     alignment: 'left',
+    layout: 'Layout-1' as Layout,
+    setLayout: (layout) => set({ layout }),
     setSelectedProvider: (provider) => set(() => ({ selectedProvider: provider })),
     setSelectedStyle: (style) => set(() => ({ selectedStyle: style })),
     setSelectedCategory: (category) => set(() => ({ selectedCategory: category })),

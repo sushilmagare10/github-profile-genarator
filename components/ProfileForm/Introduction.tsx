@@ -1,7 +1,7 @@
 "use client";
 
 import React, { ReactNode, useState } from 'react';
-import { Card, CardContent, CardHeader } from '../ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 import useIntroductionStore from '@/store/IntroStore';
@@ -12,6 +12,8 @@ import data from '@emoji-mart/data'
 import Link from 'next/link';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
 import { Textarea } from '../ui/textarea';
+import { Banners } from '@/data/IntroData';
+
 
 type EmojiFieldType = 'name' | 'aboutMe' | 'learning' | 'askMeAbout' | 'funFact' | 'portfolio' | 'blog' | 'working';
 
@@ -92,6 +94,53 @@ const Introduction = () => {
         </div>
     );
 
+    const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+
+    const toggleDropdown = (dropdown: string) => {
+        setOpenDropdown(prev => prev === dropdown ? null : dropdown);
+    };
+
+    const handleBannerSelect = (banner: string, setter: (banner: string) => void) => {
+        setOpenDropdown(null);
+        setter(banner);
+    };
+
+
+    const renderBannerOptions = (banners: (string | undefined)[], handleSelect: (banner: string) => void, dropdownKey: string) => (
+        <CardContent className='p-0'>
+            <div className="relative">
+                <button
+                    onClick={() => toggleDropdown(dropdownKey)}
+                    className="w-full bg-white border border-gray-300 rounded-md shadow-sm px-4 py-2 text-left"
+                >
+                    Select a banner
+                </button>
+                {openDropdown === dropdownKey && (
+                    <div className="absolute z-10 mt-2 w-full bg-white border border-gray-300 rounded-md shadow-lg">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 max-h-96 scrollbar-hide dropdown">
+                            {banners.map((item: string | undefined, index: number) => (
+                                item ? (
+                                    <div key={index} onClick={() => handleSelect(item)} className="cursor-pointer flex flex-col items-center">
+                                        <img
+                                            src={item}
+                                            alt={`Banner ${index + 1}`}
+                                            className="w-48 h-24 object-cover rounded-md"
+                                            loading="lazy"
+                                            width="192"
+                                            height="96"
+                                        />
+                                    </div>
+                                ) : null
+                            ))}
+
+                        </div>
+                    </div>
+                )}
+            </div>
+        </CardContent>
+    );
+
+
     return (
         <Card className='w-full h-full flex flex-col border-none'>
             <div className='space-y-8 h-max pb-40 lg:pb-4'>
@@ -99,7 +148,7 @@ const Introduction = () => {
                     title="Add Header Image"
                     icon={<FaImage className="text-blue-600 text-xl" />}
                 >
-                    <div className=' w-full flex justify-between items-center '>
+                    <div className=' w-full flex justify-between items-center mb-2'>
                         <span className='flex flex-col md:flex-row justify-between items-center gap-2'>To create custom Header use this
                             <Link
                                 href='https://leviarista.github.io/github-profile-header-generator'
@@ -124,6 +173,9 @@ const Introduction = () => {
                     </div>
                     <Card className='w-full border border-gray-300 rounded-md shadow-sm '>
                         <CardHeader className="text-lg font-semibold ">Image URL</CardHeader>
+                        <CardContent>
+                            {renderBannerOptions(Banners, setHeaderImage, 'headerBanner')}
+                        </CardContent>
                         <CardContent>
                             <Input
                                 placeholder='https://example.com/image.jpg'
@@ -219,7 +271,7 @@ type SectionType = {
     children: ReactNode;
 };
 
-const Section = ({ title, icon, children }: SectionType) => (
+const Section = React.memo(({ title, icon, children }: SectionType) => (
     <div className='w-full'>
         <div className='flex items-center space-x-3 mb-4'>
             <Label className="text-xl font-semibold flex items-center space-x-2 ">
@@ -229,6 +281,8 @@ const Section = ({ title, icon, children }: SectionType) => (
         </div>
         {children}
     </div>
-)
+));
+
+Section.displayName = 'Section';
 
 export default Introduction;
