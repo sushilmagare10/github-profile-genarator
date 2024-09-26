@@ -8,6 +8,7 @@ import { SkillsData } from '@/data/SkillsData';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
 import useSkillsStore from '@/store/SkillStore';
 import Setting from './Setting';
+import { Button } from '../ui/button';
 
 const categories = [
     "Languages",
@@ -35,6 +36,8 @@ const Skills = () => {
         icons: selectedIcons,
         iconHeight,
         alignment,
+        layout,
+        setLayout,
         addIcon,
         setSelectedProvider,
         setSelectedStyle,
@@ -65,6 +68,15 @@ const Skills = () => {
         return skills[selectedCategory as keyof typeof skills] || [];
     }, [selectedProvider, selectedCategory]);
 
+    const isSelected = (layoutId: string) => {
+        return layout === layoutId || (!layout && layoutId === 'Layout-1');
+    };
+
+    const layouts = [
+        { id: 'Layout-1', name: 'Layout-1' },
+        { id: 'Layout-2', name: 'Layout-2' },
+    ];
+
     return (
         <Tabs defaultValue="select" className='w-full  '>
             <TabsList className="grid w-full grid-cols-2 gap-4 rounded-lg h-12 px-2">
@@ -73,6 +85,19 @@ const Skills = () => {
             </TabsList>
 
             <TabsContent value="select">
+
+                <CardContent className=" flex justify-start items-center p-0 my-4 gap-4">
+                    {layouts.map((layoutOption) => (
+                        <Button
+                            variant={isSelected(layoutOption.id) ? 'default' : 'outline'}
+                            key={layoutOption.id}
+                            onClick={() => setLayout(layoutOption.id as 'Layout-1' | 'Layout-2')}
+                        >
+                            {layoutOption.name}
+                        </Button>
+                    ))}
+                </CardContent>
+
                 <Card className='w-full p-4 flex flex-col border border-gray-200 rounded-lg shadow-sm'>
                     <CardTitle>Skills</CardTitle>
                     <CardContent className='p-0 mt-2'>
@@ -132,6 +157,7 @@ const Skills = () => {
                                                     alt={skill.label}
                                                     className='min-w-16 min-h-7 rounded-md'
                                                     style={{ height: iconHeight }}
+                                                    loading='lazy'
                                                 />
                                                 <TooltipContent className='mb-2 text-primary w-full shadow-lg border font-semibold'>
                                                     <p>{skill.label}</p>

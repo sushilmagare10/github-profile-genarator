@@ -18,9 +18,12 @@ const MarkdownGenerator = () => {
   const [isCopied, setIsCopied] = useState(false);
   const { headerImage, name, aboutMe, currentlyDoing, fieldStyles, profileViews } = useIntroductionStore();
   const { gap, icons: socialIcons, sectionStyle, iconHeight: socialIconHeight } = useSocialStore();
-  const { icons: skillIcons, iconHeight: skillIconHeight, gap: skillIconsGap, alignment } = useSkillsStore();
+  const { icons: skillIcons, iconHeight: skillIconHeight, gap: skillIconsGap, alignment, layout: SkillLayout, selectedProvider } = useSkillsStore();
   const { gap: SupportIconGap, alignment: SupportAlignment, iconHeight: SupportIconsHeight, icons: SupportIcons } = useSupportStore();
   const { username, cards } = useStatsCardStore();
+
+  const isShieldsIO = selectedProvider === 'shields.io';
+  const iconsPerRow = isShieldsIO ? 6 : 12;
 
   const generateMarkdown = () => {
     let markdown = '';
@@ -86,12 +89,29 @@ const MarkdownGenerator = () => {
 
     if (skillIcons.length > 0) {
       markdown += ` **<h3 align="${alignment}">Skills</h3>**\n\n`;
-      markdown += `<p align="${alignment}">`;
-      markdown += skillIcons.map(icon =>
-        `<img src="${icon.url}" height="${heightValues[skillIconHeight]}" alt="${icon.label}" style="margin-right: ${gapValues[skillIconsGap]}px">`
-      ).join(' ');
-      markdown += '</p>\n\n';
+      if (SkillLayout === "Layout-1") {
+        markdown += `<div style="display: flex; flex-wrap: wrap; gap: ${gapValues[skillIconsGap]}px; justify-content: ${alignment};">`;
+        markdown += skillIcons.map(icon =>
+          `<img src="${icon.url}" height="${heightValues[skillIconHeight]}" alt="${icon.label}" style="margin-right: ${gapValues[skillIconsGap]}px">`
+        ).join(' ');
+        markdown += `</div>\n\n`;
+      } else if (SkillLayout === "Layout-2") {
+        markdown += `<table style="width: 100%; border: 0px solid white;">`;
+        skillIcons.forEach((icon, index) => {
+          if (index % iconsPerRow === 0) {
+            markdown += `<tr>`;
+          }
+          markdown += `<td style="text-align: center; border: 0px; padding: 12px;">`;
+          markdown += `<img src="${icon.url}" height="${heightValues[skillIconHeight]}" alt="${icon.label}"/>`;
+          markdown += `</td>`;
+          if (index % iconsPerRow === iconsPerRow - 1) {
+            markdown += `</tr>`;
+          }
+        });
+        markdown += `</table>\n\n`;
+      }
     }
+
 
     if (cards.length > 0) {
       markdown += ` **<h3 align="left">GitHub Stats</h3>**\n\n`;

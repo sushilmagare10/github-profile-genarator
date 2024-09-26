@@ -61,21 +61,18 @@
 }
 
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
 
 .scrollbar-hide {
   scrollbar-width: none;
+}
+
+.dropdown {
+    overflow-y: auto;
+    max-height: 380px;
+    will-change: scroll-position;
 }
 
 .ProseMirror {
