@@ -4,9 +4,11 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
+import { Badge } from '../ui/badge';
+import { Label } from '../ui/label';
 import { motion, Reorder } from "framer-motion";
-
-
+import { FaCog, FaGripVertical, FaAlignLeft, FaAlignCenter, FaAlignRight, FaRulerVertical, FaExpandArrowsAlt } from 'react-icons/fa';
+import { Trash2 } from 'lucide-react';
 
 const Setting = ({
     icons,
@@ -36,111 +38,181 @@ const Setting = ({
 
     const isEmpty = icons && icons.length === 0;
 
+    const getAlignmentIcon = (alignment: string) => {
+        switch (alignment) {
+            case 'left': return <FaAlignLeft className="w-4 h-4" />;
+            case 'center': return <FaAlignCenter className="w-4 h-4" />;
+            case 'right': return <FaAlignRight className="w-4 h-4" />;
+            default: return <FaAlignLeft className="w-4 h-4" />;
+        }
+    };
+
     return (
-        <Card className='w-full p-4 flex flex-col border border-gray-200 rounded-lg shadow-sm'>
-            <CardHeader className='p-0'>
-                <CardTitle className='text-lg font-semibold text-gray-800'>{title}</CardTitle>
-            </CardHeader>
-            <CardContent className='flex flex-col w-full gap-y-6 pb-40 md:pb-4 mt-4'>
-                <div className='flex flex-col justify-between -mt-1'>
-                    <div className='flex flex-col'>
-                        <h3 className='font-medium text-gray-700'>Alignment</h3>
-                        <div className='flex items-center gap-2 mt-2'>
+        <div className="w-full space-y-6">
+            {/* Alignment Section */}
+            <Card className="border-border/50">
+                <CardHeader className="pb-4">
+                    <div className="flex items-center gap-2">
+                        {getAlignmentIcon(sectionStyle)}
+                        <CardTitle className="text-base">Alignment</CardTitle>
+                    </div>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                    <div className="space-y-2">
+                        <Label className="text-sm font-medium">Choose alignment for your icons</Label>
+                        <div className="flex items-center gap-2">
                             {alignmentOptions.map(option => (
                                 <Button
                                     key={option}
-                                    className='px-6 py-2 text-sm rounded-md'
-                                    variant={`${sectionStyle === option ? 'default' : 'outline'}`}
+                                    className={`px-4 py-2 text-sm rounded-md transition-all duration-200 ${
+                                        sectionStyle === option 
+                                            ? 'shadow-sm' 
+                                            : 'hover:bg-primary/10'
+                                    }`}
+                                    variant={sectionStyle === option ? 'default' : 'secondary'}
                                     onClick={() => setSectionStyle(option)}
                                 >
-                                    {option.charAt(0).toUpperCase() + option.slice(1)}
+                                    <div className="flex items-center gap-2">
+                                        {getAlignmentIcon(option)}
+                                        {option.charAt(0).toUpperCase() + option.slice(1)}
+                                    </div>
                                 </Button>
                             ))}
                         </div>
                     </div>
+                </CardContent>
+            </Card>
 
-                    <div className='flex flex-col gap-3 '>
-                        <h3 className='font-medium text-gray-700 mt-4'>Icon Style</h3>
-                        <div className='flex items-center gap-x-4 '>
-                            <div className='flex flex-col'>
-                                <label className='text-sm font-semibold text-gray-600 mb-1'>Height</label>
-                                <Select onValueChange={(value) => setIconHeight(value)} defaultValue="lg">
-                                    <SelectTrigger className="w-[120px] bg-gray-100 border border-gray-300 rounded-md">
-                                        <SelectValue placeholder="Select Height" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        {heightOptions.map(option => (
-                                            <SelectItem key={option} value={option}>
-                                                {option}
-                                            </SelectItem>
-                                        ))}
-                                    </SelectContent>
-                                </Select>
-                            </div>
-                            <div className='flex flex-col'>
-                                <label className='text-sm font-semibold text-gray-600 mb-1'>Gap</label>
-                                <Select onValueChange={(value) => setGap(value)} defaultValue="xs">
-                                    <SelectTrigger className="w-[120px] bg-gray-100 border border-gray-300 rounded-md">
-                                        <SelectValue placeholder="Select Gap" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        {gapOptions.map(option => (
-                                            <SelectItem key={option} value={option}>
-                                                {option}
-                                            </SelectItem>
-                                        ))}
-                                    </SelectContent>
-                                </Select>
-                            </div>
+            {/* Icon Style Section */}
+            <Card className="border-border/50">
+                <CardHeader className="pb-4">
+                    <div className="flex items-center gap-2">
+                        <FaCog className="w-4 h-4 text-violet-600" />
+                        <CardTitle className="text-base">Icon Style</CardTitle>
+                    </div>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                    <div className="grid gap-4 sm:grid-cols-2">
+                        <div className="space-y-2">
+                            <Label className="text-sm font-medium flex items-center gap-2">
+                                <FaRulerVertical className="w-3 h-3" />
+                                Height
+                            </Label>
+                            <Select onValueChange={(value) => setIconHeight(value)} defaultValue="lg">
+                                <SelectTrigger className="border-border/50 focus:border-border transition-colors">
+                                    <SelectValue placeholder="Select Height" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {heightOptions.map(option => (
+                                        <SelectItem key={option} value={option}>
+                                            <div className="flex items-center gap-2">
+                                                <span className="font-medium">{option.toUpperCase()}</span>
+                                            </div>
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </div>
+                        
+                        <div className="space-y-2">
+                            <Label className="text-sm font-medium flex items-center gap-2">
+                                <FaExpandArrowsAlt className="w-3 h-3" />
+                                Gap
+                            </Label>
+                            <Select onValueChange={(value) => setGap(value)} defaultValue="xs">
+                                <SelectTrigger className="border-border/50 focus:border-border transition-colors">
+                                    <SelectValue placeholder="Select Gap" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {gapOptions.map(option => (
+                                        <SelectItem key={option} value={option}>
+                                            <div className="flex items-center gap-2">
+                                                <span className="font-medium">{option.toUpperCase()}</span>
+                                            </div>
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
                         </div>
                     </div>
-                </div>
+                </CardContent>
+            </Card>
 
-                <div className='flex flex-col mt-4'>
-                    <div className='flex justify-between items-center'>
-                        <CardTitle className='text-lg font-semibold text-gray-800'>Selected Items</CardTitle>
-                        <CardHeader className='text-xs text-gray-500'>Drag to Rearrange</CardHeader>
+            {/* Selected Items Section */}
+            <Card className="border-border/50">
+                <CardHeader className="pb-4">
+                    <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                            <FaGripVertical className="w-4 h-4 text-orange-600" />
+                            <CardTitle className="text-base">Selected Items</CardTitle>
+                        </div>
+                        {!isEmpty && (
+                            <Badge variant="secondary" className="w-fit">
+                                {icons.length} item{icons.length !== 1 ? 's' : ''}
+                            </Badge>
+                        )}
                     </div>
-
-                    <Card className='w-full flex flex-col gap-4 mt-4 p-4 bg-gray-50 border border-gray-200 cursor-grab rounded-md'>
-                        <Reorder.Group values={icons} onReorder={(newOrder) => setIcons(newOrder)}>
-                            {isEmpty ? (
-                                <div className='flex flex-col justify-center items-center w-full h-20 border border-gray-300 text-gray-500 cursor-default rounded-md'>
-                                    List is Empty!
-                                </div>
-                            ) : (
-                                <Reorder.Group values={icons} onReorder={(newOrder) => setIcons(newOrder)}>
-                                    {icons.map((icon: any) => (
-                                        <Reorder.Item
-                                            value={icon}
-                                            key={icon.id}
-                                            className='py-2'
+                    {!isEmpty && (
+                        <p className="text-sm text-muted-foreground">
+                            Drag items to reorder them
+                        </p>
+                    )}
+                </CardHeader>
+                <CardContent>
+                    <div className="space-y-3">
+                        {isEmpty ? (
+                            <Card className="border-dashed border-2 border-border/30">
+                                <CardContent className="flex flex-col justify-center items-center py-8">
+                                    <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center mb-3">
+                                        <FaCog className="w-5 h-5 text-muted-foreground" />
+                                    </div>
+                                    <p className="text-muted-foreground text-sm font-medium">No items selected</p>
+                                    <p className="text-muted-foreground text-xs text-center mt-1">
+                                        Add social media platforms to see them here
+                                    </p>
+                                </CardContent>
+                            </Card>
+                        ) : (
+                            <Reorder.Group values={icons} onReorder={(newOrder) => setIcons(newOrder)}>
+                                {icons.map((icon: any) => (
+                                    <Reorder.Item
+                                        value={icon}
+                                        key={icon.id}
+                                        className="cursor-grab  active:cursor-grabbing"
+                                    >
+                                        <motion.div
+                                            className="group w-full flex my-1.5 items-center justify-between border border-border/30 bg-background hover:bg-accent/50 rounded-lg p-3 shadow-sm hover:shadow-md transition-all duration-200"
+                                            whileHover={{ scale: 1.01 }}
+                                            whileTap={{ scale: 0.99 }}
                                         >
-                                            <motion.div
-                                                className='w-full flex justify-between items-center border border-gray-300 bg-white rounded-lg p-2 shadow-sm hover:shadow-md transition-shadow duration-300'
-                                                style={{ userSelect: 'none' }}
-                                            >
+                                            <div className="flex items-center gap-3">
+                                                <FaGripVertical className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
                                                 <img
                                                     src={icon.url}
                                                     alt={icon.id}
-                                                    className='h-8'
+                                                    className="h-6 rounded"
                                                 />
-                                                <span
-                                                    className='text-xs font-semibold text-red-500 cursor-pointer'
-                                                    onClick={() => removeIcon(icon.id)}
-                                                >
-                                                    Remove
+                                                <span className="text-sm font-medium capitalize">
+                                                    {icon.id}
                                                 </span>
-                                            </motion.div>
-                                        </Reorder.Item>
-                                    ))}
-                                </Reorder.Group>
-                            )}
-                        </Reorder.Group>
-                    </Card>
-                </div>
-            </CardContent>
-        </Card>
+                                            </div>
+                                            <Button
+                                                variant="ghost"
+                                                size="sm"
+                                                className="h-8 w-8 p-0 text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors"
+                                                onClick={() => removeIcon(icon.id)}
+                                            >
+                                                <Trash2 className="w-4 h-4" />
+                                            </Button>
+                                        </motion.div>
+                                    </Reorder.Item>
+                                ))}
+                            </Reorder.Group>
+                        )}
+                    </div>
+                </CardContent>
+            </Card>
+        </div>
     );
 }
 

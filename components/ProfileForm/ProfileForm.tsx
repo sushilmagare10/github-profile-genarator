@@ -29,7 +29,7 @@ const ProfileForm = () => {
     }
 
     return (
-        <div className=' lg:sticky lg:top-0 flex flex-col w-full  justify-start items-center gap-4 bg-card p-4 h-full overflow-scroll scrollbar-hide  border border-gray-300 shadow-lg rounded-lg'>
+        <div className='flex flex-col w-full justify-start items-center gap-4 bg-card p-4 h-full overflow-y-auto scrollbar-hide border shadow-lg rounded-lg'>
             {renderActionSection()}
         </div>
     )
