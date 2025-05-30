@@ -691,7 +691,7 @@ const StatsCard = () => {
     };
 
     return (
-        <UICard className='w-full bg-gradient-to-br from-background via-background to-muted/20 border-border/60 shadow-xl backdrop-blur-sm'>
+        <UICard className='w-full bg-background  border-border/60 shadow-xl backdrop-blur-sm'>
     <div className="p-6 space-y-6">
         <div className="space-y-2">
             <CardTitle className="text-2xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">

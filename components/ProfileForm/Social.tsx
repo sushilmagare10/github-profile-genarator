@@ -66,7 +66,7 @@ const Social = () => {
     ];
 
     return (
-        <div className="w-full max-w-4xl mx-auto space-y-6">
+        <div className="w-full max-w-4xl bg-background p-4 rounded-lg mx-auto space-y-6">
             {/* Header Section */}
             <div className="space-y-2">
                 <div className="flex items-center gap-3">
