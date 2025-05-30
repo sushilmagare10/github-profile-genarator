@@ -4,13 +4,16 @@ import { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import ProfileForm from "@/components/ProfileForm/ProfileForm";
 import ProfilePreview from "@/components/ProfilePreview";
-import Sidebar from "@/components/Sidebar/Sidebar";
+import { AppSidebar } from "@/components/Sidebar/Sidebar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import useSidebarStore from "@/store/SidebarStore";
+import {
+  SidebarProvider,
+  SidebarInset,
+  useSidebar
+} from "@/components/ui/sidebar";
 
-export default function Home() {
+function HomeContent() {
   const [isMobile, setIsMobile] = useState(false);
-  const isOpen = useSidebarStore((state) => state.isOpen);
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -24,36 +27,52 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="h-screen p-4 flex overflow-hidden w-full">
-      <Sidebar />
-      <div className={`flex-grow flex flex-col transition-all duration-300 ${isOpen ? 'ml-6' : isMobile ? 'ml-16' : 'ml-6'}`}>
-        <Header />
-        <div className="flex-grow w-full overflow-hidden mt-4 ">
+    <SidebarInset className="flex flex-col h-screen">
+      <div className="flex flex-col h-full">
+        <div className="flex-shrink-0 p-4 pb-0">
+          <Header />
+        </div>
+        <div className="flex-1 p-4 pt-4 min-h-0">
           {isMobile ? (
             <Tabs defaultValue="profile" className="w-full h-full flex flex-col">
-              <TabsList className="grid w-full grid-cols-2">
+              <TabsList className="grid w-full grid-cols-2 flex-shrink-0">
                 <TabsTrigger value="profile">Profile</TabsTrigger>
                 <TabsTrigger value="preview">Preview</TabsTrigger>
               </TabsList>
-              <TabsContent value="profile" className="flex-grow overflow-auto">
-                <ProfileForm />
+              <TabsContent value="profile" className="flex-1 min-h-0">
+                <div className="h-full overflow-y-auto">
+                  <ProfileForm />
+                </div>
               </TabsContent>
-              <TabsContent value="preview" className="flex-grow overflow-auto">
-                <ProfilePreview />
+              <TabsContent value="preview" className="flex-1 min-h-0">
+                <div className="h-full overflow-y-auto">
+                  <ProfilePreview />
+                </div>
               </TabsContent>
             </Tabs>
           ) : (
-            <div className="flex h-full w-full lg:flex-row gap-4 justify-between overflow-hidden">
-              <div className="w-full md:w-[85%] h-full overflow-auto">
+            <div className="flex h-full w-full lg:flex-row gap-4 justify-between min-h-0">
+              <div className="w-full md:w-[85%] min-h-0">
                 <ProfileForm />
               </div>
-              <div className="w-full h-full overflow-auto">
+              <div className="w-full min-h-0">
                 <ProfilePreview />
               </div>
             </div>
           )}
         </div>
       </div>
-    </main>
+    </SidebarInset>
+  );
+}
+
+export default function Home() {
+  return (
+    <SidebarProvider>
+      <div className="flex h-screen w-full sm:px-6 mx-auto">
+        <AppSidebar />
+        <HomeContent />
+      </div>
+    </SidebarProvider>
   );
 }
