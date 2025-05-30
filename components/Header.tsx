@@ -1,14 +1,20 @@
+// components/Header.tsx
 "use client"
-
 
 import Link from 'next/link'
 import React, { useState, useEffect } from 'react'
 import MarkdownGenerator from './MarkdownGenerator'
-import { IoLogoGithub, IoMdHeart } from "react-icons/io"
+import { IoLogoGithub } from "react-icons/io"
 import { motion } from "framer-motion"
+import { ThemeToggle } from './theme-toggle'
+import { SidebarTrigger} from "@/components/ui/sidebar" 
+import { IoMenu, IoStar, IoTrendingUp } from "react-icons/io5"; 
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 
 const Header = () => {
     const [starCount, setStarCount] = useState(0)
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         const fetchStarCount = async () => {
@@ -18,106 +24,115 @@ const Header = () => {
                 setStarCount(data.stargazers_count)
             } catch (error) {
                 console.error('Error fetching star count:', error)
+            } finally {
+                setIsLoading(false)
             }
         }
         fetchStarCount()
     }, [])
 
 
-    const buttonVariants = {
-        initial: { scale: 1 },
-        hover: {
-            scale: 1.05,
-            transition: { duration: 0.2 }
-        },
-        tap: { scale: 0.95 }
-    }
-
-    const iconVariants = {
-        initial: { rotate: 0, scale: 1 },
-        animate: {
-            scale: 1.2,
-            rotate: [0, 25, -25, 0],
-            transition: {
-                duration: 0.4,
-                ease: "easeInOut",
-                repeat: Infinity,
-                repeatDelay: 3
-            }
-        }
-    }
-
     return (
-        <header className='bg-secondary w-full shadow-lg border border-gray-400 rounded-md'>
-            <div className='w-full px-4 py-4 flex flex-col md:flex-row justify-between items-center '>
-                <div className='flex flex-col md:flex-[0.5] w-full items-center md:items-start'>
-                    <h1 className='text md:text-lg lg:text-2xl font-bold text-primary text-center md:text-left'>Github Profile Generator</h1>
-                    <span className='text-sm text-muted-foreground text-center md:text-left'>
-                        Made by{' '}
-                        <Link href='https://github.com/sushilmagare10' target='_blank' className='text-emerald-500 font-semibold hover:underline'>
-                            Sushil Magare
-                        </Link>
-                    </span>
+        <motion.header 
+            className='bg-background/95 backdrop-blur-sm w-full shadow-sm border-b border-border/50 sticky top-0 z-50'
+            initial="initial"
+            animate="animate"
+        >
+            <div className='w-full  py-3 flex justify-between items-center h-16'>
+                {/* Mobile Menu Button */}
+                <div className='md:hidden'>
+                    <SidebarTrigger>
+                        <Button 
+                            variant="ghost" 
+                            size="sm"
+                            className="h-9 w-9 p-0 hover:bg-accent/50 transition-colors"
+                            aria-label="Toggle sidebar"
+                        >
+                            <IoMenu size={20} className="text-foreground" />
+                        </Button>
+                    </SidebarTrigger>
                 </div>
-                <div className='md:flex-[2] flex flex-col w-full md:flex-row justify-between gap-2 '>
-                    <nav className='flex md:flex-wrap w-full items-center justify-center gap-4 lg:ml-[5%]'>
-                        <motion.div
-                            variants={buttonVariants}
-                            initial="initial"
-                            whileHover="hover"
-                            whileTap="tap"
-                        >
-                            <Link
-                                href='https://github.com/sushilmagare10/github-profile-genarator'
-                                target='_blank'
-                                className='flex flex-grow items-center gap-2 shadow-lg shadow-black/35 bg-primary  text-white px-4 py-2 text-sm  rounded-md transition-colors'
-                            >
-                                <motion.div variants={iconVariants} animate="animate">
-                                    <IoLogoGithub size={24} />
-                                </motion.div>
-                                <span className='hidden md:block font-semibold'>Give it a Star</span>
-                                <span className="bg-secondary text-black px-4 py-1  flex justify-center items-center rounded-md text-xs font-bold">
-                                    {starCount}
-                                </span>
-                            </Link>
-                        </motion.div>
 
-                        <motion.div
-                            variants={buttonVariants}
-                            initial="initial"
-                            whileHover="hover"
-                            whileTap="tap"
-                            className=''
-                        >
-                            <Link
-                                href='https://ko-fi.com/sushil_'
-                                target="_blank"
-                                className='flex items-center justify-between gap-2 shadow-lg shadow-black/35 bg-primary text-white px-4 py-2 text-sm rounded-md transition-colors'>
-                                <motion.div variants={iconVariants} animate="animate">
-                                    <IoMdHeart size={24} />
-                                </motion.div>
-                                <span className=' font-semibold '>
-                                    Donate
-                                </span>
-                            </Link>
-                        </motion.div>
-                    </nav>
-                    <div className='w-full flex flex-col md:flex-row  justify-center items-center gap-4 md:justify-end'>
+                {/* Desktop Logo/Title */}
+                <div className='hidden md:block'>
+                    <motion.div 
+                        className='flex items-center gap-3'
+                    >
+                        <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20">
+                            <IoLogoGithub className="w-5 h-5 text-primary" />
+                        </div>
+                        <div className="flex flex-col">
+                            <h1 className='text-lg font-bold text-primary tracking-tight'>
+                                GitHub Profile Generator
+                            </h1>
+                            <p className="text-xs text-muted-foreground">
+                                Create stunning profiles in seconds
+                            </p>
+                        </div>
+                    </motion.div>
+                </div>
+
+                {/* Mobile: Quick Actions */}
+                <div className='flex items-center gap-2 md:hidden'>
+                    <MarkdownGenerator />
+                    <ThemeToggle />
+                </div>
+
+                {/* Desktop: Full Action Bar */}
+                <div className='hidden md:flex items-center gap-3'>
+                <motion.div
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        transition={{ duration: 0.2 }}
+                    >
                         <Link
                             href="https://www.producthunt.com/posts/github-profile-generator?embed=true&utm_source=badge-top-post-badge&utm_medium=badge&utm_souce=badge-github&#0045;profile&#0045;generator"
                             target="_blank"
-
+                            className="block rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200"
                         >
-                            <img src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=489216&theme=light&period=daily"
-                                alt="Github&#0032;Profile&#0032;Generator - Create&#0032;stunning&#0032;GitHub&#0032;profiles&#0032;in&#0032;seconds&#0032;with&#0032;ease&#0046;&#0032;🚀 | Product Hunt"
-                                className='w-48'
+                            <img
+                                src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=489216&theme=light&period=daily"
+                                alt="Github Profile Generator - Create stunning GitHub profiles in seconds with ease. 🚀 | Product Hunt"
+                                className='h-10 w-auto transition-transform duration-200 hover:scale-105'
                             />
                         </Link>
+                    </motion.div>
+                    <motion.div
+                        initial="initial"
+                        whileHover="hover"
+                        whileTap="tap"
+                    >
+                        <Link
+                            href='https://github.com/sushilmagare10/github-profile-genarator'
+                            target='_blank'
+                            className='group inline-flex items-center gap-2 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-primary-foreground px-4 py-1.5 text-sm rounded-lg transition-all duration-200 shadow-sm hover:shadow-md'
+                        >
+                            <motion.div 
+                                animate="animate"
+                                className="flex items-center"
+                            >
+                                <IoLogoGithub size={18} />
+                            </motion.div>
+                            <span className='font-semibold'>Star on GitHub</span>
+                            <div className="flex items-center gap-1 ">
+                                <Badge variant="secondary" className="bg-background/20 text-primary-foreground border-primary-foreground/20 font-bold text-xs px-2 py-1.5">
+                                    {isLoading ? '•••' : starCount.toLocaleString()}
+                                </Badge>
+                            </div>
+                        </Link>
+                    </motion.div>
+
+                    {/* Action Buttons */}
+                    <div className="flex items-center gap-2">
                         <MarkdownGenerator />
+                        <ThemeToggle />
                     </div>
                 </div>
             </div>
-        </header >
+
+            {/* Optional: Subtle gradient border bottom */}
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+        </motion.header>
     )
 }
 
