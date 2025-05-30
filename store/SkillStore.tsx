@@ -36,7 +36,7 @@ const useSkillsStore = create<SkillsStore>((set) => ({
     selectedStyle: 'for-the-badge',
     selectedCategory: 'Languages',
     icons: [],
-    iconHeight: 'sm',
+    iconHeight: 'xs',
     gap: 'xs',
     alignment: 'left',
     layout: 'Layout-1' as Layout,

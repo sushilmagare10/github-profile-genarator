@@ -94,7 +94,7 @@ const Skills = () => {
     ];
 
     return (
-        <div className="w-full max-w-4xl mx-auto space-y-6">
+        <div className="w-full max-w-4xl mx-auto bg-background p-4 rounded-lg space-y-4">
             {/* Header Section */}
             <div className="space-y-2">
                 <div className="flex items-center gap-3">
@@ -135,10 +135,10 @@ const Skills = () => {
                     </TabsTrigger>
                 </TabsList>
 
-                <TabsContent value="select" className="mb-4 py-2 ">
+                <TabsContent value="select" className="border-none ">
                     {/* Layout Selection */}
-                    <Card className="border-border/50">
-                        <CardHeader className="pb-4">
+                    <Card className=" mb-4">
+                        <CardHeader className="pb-2">
                             <div className="flex items-center gap-2">
                                 <FaLayerGroup className="w-4 h-4 text-blue-600" />
                                 <CardTitle className="text-base">Layout Style</CardTitle>
@@ -167,8 +167,8 @@ const Skills = () => {
                     </Card>
 
                     {/* Provider and Style Selection */}
-                    <Card className="border-border/50">
-                        <CardHeader className="pb-4">
+                    <Card className="border-none mb-4">
+                        <CardHeader className="pb-2">
                             <div className="flex items-center gap-2">
                                 <FaPalette className="w-4 h-4 text-violet-600" />
                                 <CardTitle className="text-base">Icon Configuration</CardTitle>

@@ -345,7 +345,7 @@ type SectionType = {
 };
 
 const Section = React.memo(({ title, icon, description, children }: SectionType) => (
-    <div className='space-y-4 border-primary/15 rounded-lg p-4 border' >
+    <div className='space-y-4 border-primary/15 bg-background rounded-lg p-4 border' >
         <div className='space-y-2'>
             <div className='flex items-center gap-3'>
                 <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-muted">
