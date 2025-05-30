@@ -135,7 +135,7 @@ const Skills = () => {
                     </TabsTrigger>
                 </TabsList>
 
-                <TabsContent value="select" className="mb-4 py-2 ">
+                <TabsContent value="select" className="mb-4 ">
                     {/* Layout Selection */}
                     <Card className="border-border/50">
                         <CardHeader className="pb-4">
