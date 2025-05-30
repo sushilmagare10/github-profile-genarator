@@ -5,15 +5,16 @@ import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 import useIntroductionStore from '@/store/IntroStore';
-import { FaImage, FaUser, FaInfoCircle, FaTasks, FaEye } from 'react-icons/fa';
+import { FaImage, FaUser, FaInfoCircle, FaTasks, FaEye, FaSmile, FaChevronDown } from 'react-icons/fa';
 import StyleOptions from './StyleOptions';
 import Picker from '@emoji-mart/react'
 import data from '@emoji-mart/data'
 import Link from 'next/link';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
 import { Textarea } from '../ui/textarea';
+import { Button } from '../ui/button';
+import { Separator } from '../ui/separator';
 import { Banners } from '@/data/IntroData';
-
+import { useTheme } from 'next-themes';
 
 type EmojiFieldType = 'name' | 'aboutMe' | 'learning' | 'askMeAbout' | 'funFact' | 'portfolio' | 'blog' | 'working';
 
@@ -32,6 +33,8 @@ const Introduction = () => {
         setAboutMe,
         setCurrentlyDoing,
     } = useIntroductionStore();
+    const { theme, systemTheme } = useTheme()
+    const currentTheme = theme === 'system' ? systemTheme : theme
 
     const [activeEmojiField, setActiveEmojiField] = useState<EmojiFieldType | null>(null);
 
@@ -59,38 +62,45 @@ const Introduction = () => {
     };
 
     const renderInput = (value: string, onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void, placeholder: string, field: EmojiFieldType) => (
-        <div className='flex justify-center items-center gap-2 relative'>
-            {field === 'aboutMe' ? (
-                <Textarea
-                    value={value}
-                    onChange={onChange}
-                    placeholder={placeholder}
-                    className="w-full border-gray-300 rounded-md shadow-sm"
-                    rows={5}
-                />
-            ) : (
-                <Input
-                    value={value}
-                    onChange={onChange}
-                    placeholder={placeholder}
-                    className="w-full border-gray-300 rounded-md shadow-sm"
-                />
-            )}
-            <div className='flex flex-col gap-1 self-start justify-between'>
-                <div className='text-2xl  cursor-pointer' onClick={() => toggleEmoji(field)} >
-                    🙂
-                </div>
-                {activeEmojiField === field && (
-                    <CardContent className='z-30 absolute top-10 right-7 md:right-6'>
-                        <Picker
-                            data={data}
-                            emojiSize={20}
-                            onEmojiSelect={addEmoji}
-                            maxFrequentRows={2}
-                        />
-                    </CardContent>
+        <div className='relative group'>
+            <div className='flex items-center gap-3'>
+                {field === 'aboutMe' ? (
+                    <Textarea
+                        value={value}
+                        onChange={onChange}
+                        placeholder={placeholder}
+                        className="flex-1 border-border/50 focus:border-border transition-colors resize-none"
+                        rows={4}
+                    />
+                ) : (
+                    <Input
+                        value={value}
+                        onChange={onChange}
+                        placeholder={placeholder}
+                        className="flex-1 border-border/50 focus:border-border transition-colors"
+                    />
                 )}
+                <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => toggleEmoji(field)}
+                    className="h-10 w-10 p-0 shrink-0 hover:bg-accent/50 transition-colors"
+                >
+                    <FaSmile className="h-4 w-4 text-muted-foreground" />
+                </Button>
             </div>
+            {activeEmojiField === field && (
+                <div className='absolute bottom-16 right-0 z-50 bg-background border rounded-lg shadow-lg'>
+                    <Picker
+                        
+                        data={data}
+                        emojiSize={20}
+                        onEmojiSelect={addEmoji}
+                        maxFrequentRows={2}
+                        theme={currentTheme === "dark" ? 'dark' : "light"}
+                    />
+                </div>
+            )}
         </div>
     );
 
@@ -105,121 +115,129 @@ const Introduction = () => {
         setter(banner);
     };
 
-
     const renderBannerOptions = (banners: (string | undefined)[], handleSelect: (banner: string) => void, dropdownKey: string) => (
-        <CardContent className='p-0'>
+        <div className="space-y-4">
             <div className="relative">
-                <button
+                <Button
+                    variant="outline"
                     onClick={() => toggleDropdown(dropdownKey)}
-                    className="w-full bg-white border border-gray-300 rounded-md shadow-sm px-4 py-2 text-left"
+                    className="w-full justify-between h-11 text-muted-foreground hover:text-foreground transition-colors"
                 >
-                    Select a banner
-                </button>
+                    Select a banner template
+                    <FaChevronDown className={`h-4 w-4 transition-transform ${openDropdown === dropdownKey ? 'rotate-180' : ''}`} />
+                </Button>
                 {openDropdown === dropdownKey && (
-                    <div className="absolute z-10 mt-2 w-full bg-white border border-gray-300 rounded-md shadow-lg">
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 max-h-96 scrollbar-hide dropdown">
+                    <div className="absolute z-20 mt-2 w-full bg-background border rounded-lg shadow-lg">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 p-4 max-h-80 overflow-y-auto">
                             {banners.map((item: string | undefined, index: number) => (
                                 item ? (
-                                    <div key={index} onClick={() => handleSelect(item)} className="cursor-pointer flex flex-col items-center">
+                                    <div 
+                                        key={index} 
+                                        onClick={() => handleSelect(item)} 
+                                        className="cursor-pointer group hover:bg-accent/50 p-2 rounded-md transition-colors"
+                                    >
                                         <img
                                             src={item}
                                             alt={`Banner ${index + 1}`}
-                                            className="w-48 h-24 object-cover rounded-md"
+                                            className="w-full h-16 object-cover rounded border group-hover:border-border transition-colors"
                                             loading="lazy"
-                                            width="192"
-                                            height="96"
                                         />
                                     </div>
                                 ) : null
                             ))}
-
                         </div>
                     </div>
                 )}
             </div>
-        </CardContent>
+        </div>
     );
 
-
     return (
-        <Card className='w-full h-full flex flex-col border-none'>
-            <div className='space-y-8 h-max pb-40 lg:pb-4'>
+        <div className='w-full max-w-4xl mx-auto'>
+            <div className='space-y-8 pb-8'>
+                {/* Header Image Section */}
                 <Section
-                    title="Add Header Image"
-                    icon={<FaImage className="text-blue-600 text-xl" />}
+                    title="Header Image"
+                    icon={<FaImage className="text-blue-600" />}
+                    description="Add a custom header image to make your profile stand out"
                 >
-                    <div className=' w-full flex justify-between items-center mb-2'>
-                        <span className='flex flex-col md:flex-row justify-between items-center gap-2'>To create custom Header use this
-                            <Link
-                                href='https://leviarista.github.io/github-profile-header-generator'
-                                target='_blank'
-                                className='text-blue-600 font-semibold capitalize'
-                            >
-                                github profile header generator
-                            </Link>
-                        </span>
-                        <div className='w-5 h-5 mb-1 flex justify-center items-center rounded-full bg-secondary border'>
-                            <TooltipProvider>
-                                <Tooltip>
-                                    <TooltipTrigger>
-                                        <span className='font-bold text-gray-500'>?</span>
-                                    </TooltipTrigger>
-                                    <TooltipContent className='w-60'>
-                                        After crafting your custom header, incorporate the image directly into your README file for optimal presentation.
-                                    </TooltipContent>
-                                </Tooltip>
-                            </TooltipProvider>
-                        </div>
-                    </div>
-                    <Card className='w-full border border-gray-300 rounded-md shadow-sm '>
-                        <CardHeader className="text-lg font-semibold ">Image URL</CardHeader>
-                        <CardContent>
+                    <Card className="border-border/50">
+                        <CardContent className="pt-6 space-y-6">
+                            <div className="flex items-center justify-between p-4 bg-muted/30 rounded-lg">
+                                <div className="flex flex-col space-y-1">
+                                    <span className="text-sm font-medium">Need a custom header?</span>
+                                    <span className="text-xs text-muted-foreground">Use our recommended generator</span>
+                                </div>
+                                <Button variant="outline" size="sm" asChild>
+                                    <Link
+                                        href='https://leviarista.github.io/github-profile-header-generator'
+                                        target='_blank'
+                                        className="text-xs"
+                                    >
+                                        Open Generator
+                                    </Link>
+                                </Button>
+                            </div>
+                            
                             {renderBannerOptions(Banners, setHeaderImage, 'headerBanner')}
-                        </CardContent>
-                        <CardContent>
-                            <Input
-                                placeholder='https://example.com/image.jpg'
-                                type='url'
-                                value={headerImage}
-                                onChange={(e) => setHeaderImage(e.target.value)}
-                                className="w-full rounded-md shadow-sm "
-                            />
+                            
+                            <div className="space-y-2">
+                                <Label className="text-sm font-medium">Or paste your image URL</Label>
+                                <Input
+                                    placeholder='https://example.com/image.jpg'
+                                    type='url'
+                                    value={headerImage}
+                                    onChange={(e) => setHeaderImage(e.target.value)}
+                                    className="border-border/50 focus:border-border transition-colors"
+                                />
+                            </div>
                         </CardContent>
                     </Card>
                 </Section>
+
+                {/* Profile Views Section */}
                 <Section
-                    title="Add Profile Views Counter"
-                    icon={<FaEye className="text-teal-600 text-xl" />}
+                    title="Profile Views Counter"
+                    icon={<FaEye className="text-emerald-600" />}
+                    description="Track how many people visit your GitHub profile"
                 >
-                    <Card className='w-full border border-gray-300 rounded-md shadow-sm '>
-                        <CardHeader className="text-lg font-semibold ">GitHub Username for Profile Views</CardHeader>
-                        <CardContent>
-                            <Input
-                                placeholder='Your GitHub username'
-                                value={profileViews}
-                                onChange={(e) => setProfileViews(e.target.value)}
-                                className="w-full rounded-md shadow-sm "
-                            />
+                    <Card className="border-border/50">
+                        <CardContent className="pt-6 space-y-4">
+                            <div className="space-y-2">
+                                <Label className="text-sm font-medium">GitHub Username</Label>
+                                <Input
+                                    placeholder='Your GitHub username'
+                                    value={profileViews}
+                                    onChange={(e) => setProfileViews(e.target.value)}
+                                    className="border-border/50 focus:border-border transition-colors"
+                                />
+                            </div>
                             {profileViews && (
-                                <div className="mt-4">
-                                    <p>Preview:</p>
+                                <div className="space-y-3 p-4 bg-muted/30 rounded-lg">
+                                    <Label className="text-sm font-medium">Preview</Label>
                                     <img
                                         src={`https://komarev.com/ghpvc/?username=${profileViews}&label=Profile%20views&color=0e75b6&style=flat`}
                                         alt="Profile views counter"
+                                        className="rounded"
                                     />
                                 </div>
                             )}
                         </CardContent>
                     </Card>
                 </Section>
+
+                {/* Introduction Section */}
                 <Section
-                    title="Add Introduction"
-                    icon={<FaUser className="text-green-600 text-xl" />}
+                    title="Introduction"
+                    icon={<FaUser className="text-violet-600" />}
+                    description="Tell the world who you are"
                 >
-                    <Card className='w-full  rounded-md shadow-sm '>
-                        <CardHeader className="text-lg font-semibold ">Hi, my name is</CardHeader>
-                        <CardContent>
-                            {renderInput(name, (e) => setName(e.target.value), "John Doe", 'name')}
+                    <Card className="border-border/50">
+                        <CardContent className="pt-6 space-y-4">
+                            <div className="space-y-2">
+                                <Label className="text-sm font-medium">Your Name</Label>
+                                {renderInput(name, (e) => setName(e.target.value), "John Doe", 'name')}
+                            </div>
                         </CardContent>
                     </Card>
                     <StyleOptions
@@ -228,14 +246,19 @@ const Introduction = () => {
                         onStyleChange={(style) => setFieldStyle('name', style)}
                     />
                 </Section>
+
+                {/* About Me Section */}
                 <Section
-                    title="Add About Me"
-                    icon={<FaInfoCircle className="text-purple-600 text-xl" />}
+                    title="About Me"
+                    icon={<FaInfoCircle className="text-amber-600" />}
+                    description="Share your story and background"
                 >
-                    <Card className='w-full border border-gray-300 rounded-md shadow-sm '>
-                        <CardHeader className="text-lg font-semibold ">About me</CardHeader>
-                        <CardContent>
-                            {renderInput(aboutMe, (e) => setAboutMe(e.target.value), "Tell us about yourself", 'aboutMe')}
+                    <Card className="border-border/50">
+                        <CardContent className="pt-6 space-y-4">
+                            <div className="space-y-2">
+                                <Label className="text-sm font-medium">About You</Label>
+                                {renderInput(aboutMe, (e) => setAboutMe(e.target.value), "Tell us about yourself", 'aboutMe')}
+                            </div>
                         </CardContent>
                     </Card>
                     <StyleOptions
@@ -245,39 +268,96 @@ const Introduction = () => {
                     />
                 </Section>
 
+                {/* Currently Doing Section */}
                 <Section
-                    title="Add Currently Doing"
-                    icon={<FaTasks className="text-orange-600 text-xl" />}
+                    title="What You're Up To"
+                    icon={<FaTasks className="text-orange-600" />}
+                    description="Share your current projects and interests"
                 >
-                    <Card className='w-full border border-gray-300 h-full rounded-md shadow-sm '>
-                        <CardContent className='space-y-4 mt-4'>
-                            {renderInput(currentlyDoing.working, (e) => setCurrentlyDoing('working', e.target.value), "💼 I'm currently working on", 'working')}
-                            {renderInput(currentlyDoing.learning, (e) => setCurrentlyDoing('learning', e.target.value), "🌱 I'm currently learning", 'learning')}
-                            {renderInput(currentlyDoing.askMeAbout, (e) => setCurrentlyDoing('askMeAbout', e.target.value), "💬 Ask me about anything related to", 'askMeAbout')}
-                            {renderInput(currentlyDoing.funFact, (e) => setCurrentlyDoing('funFact', e.target.value), "⚡ Fun fact: ", 'funFact')}
-                            {renderInput(currentlyDoing.portfolio, (e) => setCurrentlyDoing('portfolio', e.target.value), "📂 Check out my portfolio: ", 'portfolio')}
-                            {renderInput(currentlyDoing.blog, (e) => setCurrentlyDoing('blog', e.target.value), "📝 Read my blog: ", 'blog')}
+                    <Card className="border-border/50">
+                        <CardContent className="pt-6 space-y-2">
+                            <div className="grid gap-2">
+                                <div className="space-y-2">
+                                    <Label className="text-sm font-medium flex items-center gap-2">
+                                        💼 Currently Working On
+                                    </Label>
+                                    {renderInput(currentlyDoing.working, (e) => setCurrentlyDoing('working', e.target.value), "What project are you working on?", 'working')}
+                                </div>
+                                
+                                <Separator className="bg-border/30" />
+                                
+                                <div className="space-y-2">
+                                    <Label className="text-sm font-medium flex items-center gap-2">
+                                        🌱 Currently Learning
+                                    </Label>
+                                    {renderInput(currentlyDoing.learning, (e) => setCurrentlyDoing('learning', e.target.value), "What are you learning?", 'learning')}
+                                </div>
+                                
+                                <Separator className="bg-border/30" />
+                                
+                                <div className="space-y-2">
+                                    <Label className="text-sm font-medium flex items-center gap-2">
+                                        💬 Ask Me About
+                                    </Label>
+                                    {renderInput(currentlyDoing.askMeAbout, (e) => setCurrentlyDoing('askMeAbout', e.target.value), "Your areas of expertise", 'askMeAbout')}
+                                </div>
+                                
+                                <Separator className="bg-border/30" />
+                                
+                                <div className="space-y-2">
+                                    <Label className="text-sm font-medium flex items-center gap-2">
+                                        ⚡ Fun Fact
+                                    </Label>
+                                    {renderInput(currentlyDoing.funFact, (e) => setCurrentlyDoing('funFact', e.target.value), "Share something interesting about yourself", 'funFact')}
+                                </div>
+                                
+                                <Separator className="bg-border/30" />
+                                
+                                <div className="space-y-2">
+                                    <Label className="text-sm font-medium flex items-center gap-2">
+                                        📂 Portfolio
+                                    </Label>
+                                    {renderInput(currentlyDoing.portfolio, (e) => setCurrentlyDoing('portfolio', e.target.value), "Link to your portfolio", 'portfolio')}
+                                </div>
+                                
+                                <Separator className="bg-border/30" />
+                                
+                                <div className="space-y-2">
+                                    <Label className="text-sm font-medium flex items-center gap-2">
+                                        📝 Blog
+                                    </Label>
+                                    {renderInput(currentlyDoing.blog, (e) => setCurrentlyDoing('blog', e.target.value), "Link to your blog", 'blog')}
+                                </div>
+                            </div>
                         </CardContent>
                     </Card>
                 </Section>
             </div>
-        </Card>
+        </div>
     )
 }
 
 type SectionType = {
     title: string;
     icon: ReactNode;
+    description?: string;
     children: ReactNode;
 };
 
-const Section = React.memo(({ title, icon, children }: SectionType) => (
-    <div className='w-full'>
-        <div className='flex items-center space-x-3 mb-4'>
-            <Label className="text-xl font-semibold flex items-center space-x-2 ">
-                {icon}
-                <span>{title}</span>
-            </Label>
+const Section = React.memo(({ title, icon, description, children }: SectionType) => (
+    <div className='space-y-4 border-primary/15 rounded-lg p-4 border' >
+        <div className='space-y-2'>
+            <div className='flex items-center gap-3'>
+                <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-muted">
+                    {React.cloneElement(icon as React.ReactElement, { className: "w-4 h-4" })}
+                </div>
+                <div className="space-y-1">
+                    <h3 className="text-lg font-semibold tracking-tight">{title}</h3>
+                    {description && (
+                        <p className="text-sm text-muted-foreground">{description}</p>
+                    )}
+                </div>
+            </div>
         </div>
         {children}
     </div>

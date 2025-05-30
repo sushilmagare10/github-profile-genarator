@@ -3,78 +3,136 @@
 @tailwind utilities;
 
 
+:root {
+  --background: 0 0% 97.6471%;
+  --foreground: 0 0% 12.5490%;
+  --card: 0 0% 98.8235%;
+  --card-foreground: 0 0% 12.5490%;
+  --popover: 0 0% 98.8235%;
+  --popover-foreground: 0 0% 12.5490%;
+  --primary: 16.6667 21.9512% 32.1569%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 34.0541 100.0000% 85.4902%;
+  --secondary-foreground: 16.2712 50.4274% 22.9412%;
+  --muted: 0 0% 93.7255%;
+  --muted-foreground: 0 0% 39.2157%;
+  --accent: 0 0% 90.9804%;
+  --accent-foreground: 0 0% 12.5490%;
+  --destructive: 10.1639 77.8723% 53.9216%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 0 0% 84.7059%;
+  --input: 0 0% 84.7059%;
+  --ring: 16.6667 21.9512% 32.1569%;
+  --chart-1: 16.6667 21.9512% 32.1569%;
+  --chart-2: 34.0541 100.0000% 85.4902%;
+  --chart-3: 0 0% 90.9804%;
+  --chart-4: 34.5763 100.0000% 88.4314%;
+  --chart-5: 16.5000 24.3902% 32.1569%;
+  --sidebar: 0 0% 98.4314%;
+  --sidebar-foreground: 0 0% 14.5098%;
+  --sidebar-primary: 0 0% 20.3922%;
+  --sidebar-primary-foreground: 0 0% 98.4314%;
+  --sidebar-accent: 0, 0%, 89%;
+  --sidebar-accent-foreground: 0 0% 20.3922%;
+  --sidebar-border: 0 0% 92.1569%;
+  --sidebar-ring: 0 0% 70.9804%;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --radius: 0.5rem;
+  --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 1px 2px -1px hsl(0 0% 0% / 0.10);
+  --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 1px 2px -1px hsl(0 0% 0% / 0.10);
+  --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 2px 4px -1px hsl(0 0% 0% / 0.10);
+  --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 4px 6px -1px hsl(0 0% 0% / 0.10);
+  --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 8px 10px -1px hsl(0 0% 0% / 0.10);
+  --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
+}
+
+.dark {
+  --background: 0 0% 6.6667%;
+  --foreground: 0 0% 93.3333%;
+  --card: 0 0% 9.8039%;
+  --card-foreground: 0 0% 93.3333%;
+  --popover: 0 0% 9.8039%;
+  --popover-foreground: 0 0% 93.3333%;
+  --primary: 29.5082 100% 88.0392%;
+  --primary-foreground: 183.1579 54.2857% 6.8627%;
+  --secondary: 28.2353 17.5258% 19.0196%;
+  --secondary-foreground: 29.5082 100% 88.0392%;
+  --muted: 0 0% 13.3333%;
+  --muted-foreground: 0 0% 70.5882%;
+  --accent: 0 0% 16.4706%;
+  --accent-foreground: 0 0% 93.3333%;
+  --destructive: 10.1639 77.8723% 53.9216%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 45 14.2857% 10.9804%;
+  --input: 0 0% 28.2353%;
+  --ring: 29.5082 100% 88.0392%;
+  --chart-1: 29.5082 100% 88.0392%;
+  --chart-2: 28.2353 17.5258% 19.0196%;
+  --chart-3: 0 0% 16.4706%;
+  --chart-4: 30.0000 17.8571% 21.9608%;
+  --chart-5: 30 100% 87.8431%;
+  --sidebar: 240 5.8824% 10%;
+  --sidebar-foreground: 240 4.7619% 95.8824%;
+  --sidebar-primary: 224.2781 76.3265% 48.0392%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 240 3.7037% 15.8824%;
+  --sidebar-accent-foreground: 240 4.7619% 95.8824%;
+  --sidebar-border: 240 3.7037% 15.8824%;
+  --sidebar-ring: 240 4.8780% 83.9216%;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --radius: 0.5rem;
+  --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 1px 2px -1px hsl(0 0% 0% / 0.10);
+  --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 1px 2px -1px hsl(0 0% 0% / 0.10);
+  --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 2px 4px -1px hsl(0 0% 0% / 0.10);
+  --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 4px 6px -1px hsl(0 0% 0% / 0.10);
+  --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 8px 10px -1px hsl(0 0% 0% / 0.10);
+  --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
+}
+
+
 @layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground tracking-wide;
+  }
+
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --radius: 0.3rem;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
+    --sidebar-background: hsl(0 0% 98%);
+    --sidebar-foreground: hsl(0 0% 25%);
+    --sidebar-border: hsl(0 0% 85%);
+    --sidebar-ring: hsl(0 0% 60%);
   }
 
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    --sidebar-background: hsl(0 0% 10%);
+    --sidebar-foreground: hsl(0 0% 90%);
+    --sidebar-border: hsl(0 0% 20%);
+    --sidebar-ring: hsl(0 0% 60%);
   }
 }
 
-
+/* Optional: Utility overrides */
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
-
 .scrollbar-hide {
   scrollbar-width: none;
 }
-
 .dropdown {
-    overflow-y: auto;
-    max-height: 380px;
-    will-change: scroll-position;
+  overflow-y: auto;
+  max-height: 380px;
+  will-change: scroll-position;
 }
-
 .ProseMirror {
   height: 80px;
   padding: 10px;
