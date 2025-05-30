@@ -189,7 +189,7 @@ const MarkdownGenerator = () => {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
-        <Button onClick={generateMarkdown} className=' px-2 py-1 md:px-4 flex justify-between items-center gap-3'>
+        <Button onClick={generateMarkdown} className=' px-2 py-0 md:px-4 flex justify-between items-center gap-3'>
           <IoLogoMarkdown />
           <span className=''>
             Generate Markdown
@@ -199,7 +199,7 @@ const MarkdownGenerator = () => {
       <AnimatePresence>
         {isOpen && (
           <Dialog open={isOpen} onOpenChange={setIsOpen}>
-            <DialogContent className='w-full max-w-[95vw] md:max-w-[80vw] lg:max-w-[980px]'>
+            <DialogContent className='w-full max-w-[95vw] md:max-w-[80vw] lg:max-w-[980px] h-[70vh]'>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -210,10 +210,9 @@ const MarkdownGenerator = () => {
                   <DialogTitle>Copy the Markdown Code</DialogTitle>
                 </DialogHeader>
                 <Textarea
-                  rows={18}
                   value={markdownCode}
                   readOnly
-                  className="font-mono mt-4 text-sm md:text-base w-full"
+                  className="font-mono h-full mt-4 text-sm md:text-base w-full"
                 />
                 <DialogFooter className="flex flex-col sm:flex-row justify-end gap-2 mt-4">
                   <Button variant="secondary" onClick={() => setIsOpen(false)}>

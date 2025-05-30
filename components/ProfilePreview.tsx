@@ -90,9 +90,9 @@ const ProfilePreview = () => {
   const iconsPerRow = 6;
 
   return (
-    <div className='flex flex-col justify-start items-center bg-card p-6 h-full overflow-scroll scrollbar-hide border border-gray-300 w-full shadow-lg rounded-lg'>
-      <div className='h-full w-full  border-none'>
-        <h1 className='text-2xl font-bold mb-4'>Profile Preview</h1>
+    <div className='flex flex-col justify-start items-center bg-card p-6 h-full overflow-scroll scrollbar-hide border  w-full shadow-lg rounded-lg'>
+      <div className='h-full w-full border-none'>
+        <h1 className='text-lg font-bold mb-4'>Profile Preview</h1>
 
         <div className='mt-2 pb-8 space-y-6'>
           {headerImage && (
@@ -149,42 +149,42 @@ const ProfilePreview = () => {
           </div>
 
           {aboutMe && (
-            <div className='text-center'>
+            <div className='text-center text-sm'>
               {applyStyle(aboutMe, fieldStyles.aboutMe)}
             </div>
           )}
 
           {(currentlyDoing.working || currentlyDoing.learning || currentlyDoing.askMeAbout || currentlyDoing.funFact || currentlyDoing.portfolio || currentlyDoing.blog) && (
             <div className='text-left'>
-              <h3 className='font-bold text-xl mb-2'>Rapid Fire:</h3>
+              <h3 className='font-bold text-lg mb-2'>Rapid Fire:</h3>
               <ul className='list-disc list-inside space-y-1'>
                 {currentlyDoing.working && (
-                  <li className='flex items-center text-lg'>
+                  <li className='flex items-center text-sm'>
                     <span className='mr-2'>💼</span> I&apos;m currently working on: <strong className='ml-2'>{renderHTML(currentlyDoing.working)}</strong>
                   </li>
                 )}
                 {currentlyDoing.learning && (
-                  <li className='flex items-center text-lg'>
+                  <li className='flex items-center text-sm'>
                     <span className='mr-2'>🌱</span> I&apos;m currently learning: <strong className='ml-2'>{renderHTML(currentlyDoing.learning)}</strong>
                   </li>
                 )}
                 {currentlyDoing.askMeAbout && (
-                  <li className='flex items-center text-lg'>
+                  <li className='flex items-center text-sm'>
                     <span className='mr-2'>💬</span> Ask me about: <strong className='ml-2'>{renderHTML(currentlyDoing.askMeAbout)}</strong>
                   </li>
                 )}
                 {currentlyDoing.funFact && (
-                  <li className='flex items-center text-lg'>
+                  <li className='flex items-center text-sm'>
                     <span className='mr-2'>⚡</span> Fun fact: <strong className='ml-2'>{renderHTML(currentlyDoing.funFact)}</strong>
                   </li>
                 )}
                 {currentlyDoing.portfolio && (
-                  <li className='flex items-center text-lg'>
+                  <li className='flex items-center text-sm'>
                     <span className='mr-2'>📂</span> My portfolio: <a href={currentlyDoing.portfolio} target="_blank" rel="noopener noreferrer" className='ml-2 text-blue-500 hover:underline'>{currentlyDoing.portfolio}</a>
                   </li>
                 )}
                 {currentlyDoing.blog && (
-                  <li className='flex items-center text-lg'>
+                  <li className='flex items-center text-sm'>
                     <span className='mr-2'>📝</span> My blog: <a href={currentlyDoing.blog} target="_blank" rel="noopener noreferrer" className='ml-2 text-blue-500 hover:underline'>{currentlyDoing.blog}</a>
                   </li>
                 )}
@@ -197,9 +197,9 @@ const ProfilePreview = () => {
 
 
         {SkillLayout === "Layout-1" && (
-          <div className='text-left'>
-            <h3 className='font-bold text-xl mb-2'>Skills:</h3>
-            <div
+          <div className='text-left mb-6'>
+            <h3 className='font-bold text-lg mb-2'>Skills:</h3>
+            <div 
               className='flex flex-wrap'
               style={{
                 columnGap: `${gapValues[skillIconsGap]}px`,
@@ -225,8 +225,8 @@ const ProfilePreview = () => {
         )}
 
         {SkillLayout === "Layout-2" && (
-          <div className="w-full mb-4">
-            <h3 className="font-bold text-xl mb-2">Skills:</h3>
+          <div className="w-full mb-6">
+            <h3 className="font-bold text-lg mb-2">Skills:</h3>
             <table className="w-full table-auto border-collapse">
               <tbody>
                 {Array(Math.ceil(skillIcons.length / iconsPerRow))
@@ -263,8 +263,8 @@ const ProfilePreview = () => {
         )}
 
 
-        <div className='flex flex-col w-full justify-start items-center '>
-          <h2 className='font-bold text-xl mb-2 self-start'>GitHub Stats</h2>
+        <div className='flex flex-col w-full justify-start items-center mb-6'>
+          <h2 className='font-bold text-lg mb-2 self-start'>GitHub Stats</h2>
           <div className='grid grid-cols-2 w-full gap-x-2 gap-y-3'>
             {cards.map((card, index) => (
               <img
@@ -278,8 +278,8 @@ const ProfilePreview = () => {
         </div>
 
 
-        <div className='text-left'>
-          <h3 className='font-bold text-xl mb-2'>Support Me:</h3>
+        <div className='text-left pb-4'>
+          <h3 className='font-bold text-lg mb-2'>Support Me:</h3>
           <div
             className='flex flex-wrap'
             style={{
